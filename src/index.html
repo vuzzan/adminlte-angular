@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AMS - IT Dashboard</title>
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <app-root class="hold-transition sidebar-mini sidebar-open"></app-root>
+    
+  </body>
+
+  <script type="text/javascript">  
+    function viewProcessModal(processId, processName, siteId, appId) {
+      
+      // window['angularComponentReference'].zone.run(function() {
+      //   //return window['angularComponentRef'].component.showResultDtlViaMapTip('Hill-Annex Mine State Park','210','spk00176')
+      //   return window['angularComponentReference'].component.viewProcessModal(processId, processName, siteId, appId)
+      // });
+      // window.angularComponentReference.zone.run(() => { 
+      //   console.log("window.angularComponentReference.zone.run...");
+      //   window.angularComponentReference.viewProcessModal(processId, processName, siteId, appId); 
+      // });
+      window.angularComponentReference.viewProcessModal(processId, processName, siteId, appId);
+    }  
+  </script>
+</html>
