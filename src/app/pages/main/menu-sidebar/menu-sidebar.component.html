@@ -2,12 +2,16 @@
   <!-- Brand Logo -->
   <a [routerLink]="['/']" class="brand-link">
     <img
-        src="assets/img/logo.png"
-        alt="IT Dashboard"
-        class="brand-image elevation-3"
-        style="height:30px;"
-      />
-    <span class="brand-text font-weight-bold" style="font-weight:bold;font-size:20px">AMS</span>
+      src="assets/img/ams_logo.jpg"
+      alt="IT Dashboard"
+      class="brand-image img-circle elevation-3"
+      style="height: 30px;"
+    />
+    <span
+      class="brand-text font-weight-bold"
+      style="font-weight: bold; font-size: 20px;"
+      >AMS</span
+    >
   </a>
 
   <!-- Sidebar -->
@@ -20,26 +24,46 @@
         role="menu"
         data-accordion="false"
       >
-             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                  List Sites
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              List Sites
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item" *ngFor="let site of sitelist; let i = index">
+              <a (click)="chooseSite(site)" class="nav-link"
+                ><i
+                  class="far fa-circle nav-icon text-{{
+                    site.siteState == 'UP'
+                      ? 'success'
+                      : site.siteState == 'DOWN'
+                      ? 'danger'
+                      : 'warning'
+                  }}"
+                  [ngStyle]="{ color: site.colour }"
+                >
+                </i>
+                <p>{{ site.siteId }}</p>
+                <span
+                  class="right badge badge-{{
+                    site.siteState == 'UP'
+                      ? 'success'
+                      : site.siteState == 'DOWN'
+                      ? 'danger'
+                      : 'warning'
+                  }}"
+                  >{{ site.siteState }} {{ site.info[0]['UP'] }}/{{
+                    site.info[1]['DOWN']
+                  }}</span
+                >
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item" *ngFor="let site of sitelist;let i = index">
-                  <a (click)="chooseSite(site)" class="nav-link"><i class="far fa-circle nav-icon text-{{ site.siteState=='UP'?'success':'danger' }}" [ngStyle]="{'color': site.colour}">
-
-                  </i>
-                  <p>{{ site.siteId }}</p>
-                  <span class="right badge badge-{{ site.siteState=='UP'?'success':'danger' }}">{{ site.siteState }} {{ site.info[0]["UP"] }}/{{ site.info[1]["DOWN"] }}</span>
-                  </a>
-                </li>
-              </ul>
             </li>
-            <li class="nav-item">
+          </ul>
+        </li>
+        <!-- <li class="nav-item">
               <a href="../widgets.html" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
@@ -117,7 +141,7 @@
                   <span class="right badge badge-danger"></span>
                 </p>
               </a>
-            </li>
+            </li> -->
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

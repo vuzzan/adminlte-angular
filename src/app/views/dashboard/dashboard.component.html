@@ -2,26 +2,65 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">List Site</h3>
             <div class="card-tools">
-              <span data-toggle="tooltip" class="badge bg-primary">Last Refresh: 120s ago</span>
-              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              <span data-toggle="tooltip" class="badge bg-primary"
+                >Last Refresh: 120s ago</span
+              >
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="maximize"
+              >
+                <i class="fas fa-expand"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
               </button>
             </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <a class="btn btn-app btn-rounded bg-{{ site.siteState=='UP'?'success':(site.siteState=='DOWN'?'danger':'warning') }}" 
-              *ngFor="let site of sitelist;let i = index">
-
+            <a
+              style="
+                border-radius: 20px;
+                height: 80px;
+                min-width: 100px;
+                font-size: 20px;
+              "
+              class="btn btn-lg btn-app bg-{{
+                site.siteState == 'UP'
+                  ? 'success'
+                  : site.siteState == 'DOWN'
+                  ? 'danger'
+                  : 'warning'
+              }}"
+              *ngFor="let site of sitelist; let i = index"
+            >
               <span class="badge bg-white">{{ site.siteState }}</span>
-              
-              <a (click)="chooseSite(site)" class="btn btn-sm btn-{{ site.siteState=='UP'?'success':(site.siteState=='DOWN'?'danger':'warning') }}">
-                <i class="fa fa-star"></i><b>{{ site.siteName }} {{ site.info[0]["UP"] }}/{{ site.info[1]["DOWN"] }}</b>
+
+              <a
+                (click)="chooseSite(site)"
+                class="btn btn-sm btn-{{
+                  site.siteState == 'UP'
+                    ? 'success'
+                    : site.siteState == 'DOWN'
+                    ? 'danger'
+                    : 'warning'
+                }}"
+              >
+                <i class="fa fa-star"></i
+                ><b
+                  >{{ site.siteName }} <br />{{ site.info[0]['UP'] }}/{{
+                    site.info[1]['DOWN']
+                  }}</b
+                >
               </a>
             </a>
           </div>
@@ -41,15 +80,18 @@
     <!-- /.row -->
     <div class="row">
       <div class="col-12">
-
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">List Applications</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table datatable [dtOptions]="dtOptions" class="table table-bordered table-hover" style="width:100%">
-            </table>
+            <table
+              datatable
+              [dtOptions]="dtOptions"
+              class="table table-bordered table-hover"
+              style="width: 100%;"
+            ></table>
           </div>
           <!-- /.card-body -->
         </div>
@@ -60,66 +102,78 @@
   </div>
   <!-- Main row -->
 </section>
-<button class="btn btn-lg btn-outline-primary" 
-    (click)="viewProcessModal('','','','')"> 
-    Popup using Angular and Bootstrap 
-</button> 
 <!-- /.content -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Process Information</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
-      <div class="row">
-          <div class="col-8">
-            <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0" style="height: 500px;">
-                <table class="table table-head-fixed text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let obj of processInfo.info;let i = index">
-                      <th style="width:50%">{{ obj[0] }}</th>
-                      <td>{{ obj[1] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="card">
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0" style="height: 500px;">
+            <table class="table table-head-fixed text-nowrap">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of processInfo.info; let i = index">
+                  <th style="width: 50%;">{{ obj[0] }}</th>
+                  <td>{{ obj[1] }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="col-4">
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <th style="width:50%">Site ID</th>
-                      <td>{{appSettings.siteId}}</td>
-                    </tr>
-                    <tr>
-                      <th style="width:50%">Application ID</th>
-                      <td>{{appSettings.applicationId}}</td>
-                    </tr>
-                    <tr>
-                      <th style="width:50%">Process ID</th>
-                      <td>{{appSettings.processId}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <button type="button" class="btn btn-lg btn-block btn-warning" (click)="sendAction(obj)"
-                *ngFor="let obj of processInfo.processActions;let i = index">{{ obj }}
-              </button>
-              <button type="button" class="btn btn-outline-dark btn-lg btn-block" (click)="modal.close('Save click')">Close</button>
-          </div>
+          <!-- /.card-body -->
+        </div>
       </div>
+      <div class="col-4">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th style="width: 50%;">Site ID</th>
+                <td>{{ appSettings.siteId }}</td>
+              </tr>
+              <tr>
+                <th style="width: 50%;">Application ID</th>
+                <td>{{ appSettings.applicationId }}</td>
+              </tr>
+              <tr>
+                <th style="width: 50%;">Process ID</th>
+                <td>{{ appSettings.processId }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button
+          type="button"
+          class="btn btn-lg btn-block btn-warning"
+          (click)="sendAction(obj)"
+          *ngFor="let obj of processInfo.processActions; let i = index"
+        >
+          {{ obj }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-lg btn-block"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </ng-template>
