@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit {
   applicationlist: Array<Application> = [];
   sitelist: Array<Site> = [];
   processlist: Array<Process>;
-  //processInfo:ProcessDef;
   processInfo: ProcessDef = {
     processId: '',
     processName: '',
@@ -42,12 +41,16 @@ export class DashboardComponent implements OnInit {
     colour: '',
   };
   doActionContent:any;
+  
+  confirmUserid:String = "";
+  confirmPassword:String = "";
 
   doFlip: Boolean = false;
   updatedTime: String;
   selectedProcessId: String = '';
   selectedSite: String = '';
   selectedApplication: String;
+  
   loading: Boolean = false;
   show: Boolean = false;
   code: String;
@@ -57,6 +60,7 @@ export class DashboardComponent implements OnInit {
   showModal: String = 'modal';
   viewProcess: Boolean = false;
   instruction: Boolean = true;
+
   cimWebUserId: String;
   cimWebToken: String;
 
@@ -686,12 +690,17 @@ export class DashboardComponent implements OnInit {
     this.idShowInfo = true;
   }
   sendAction() {
+    this.confirmPassword = ((document.getElementById("confirmPassword") as HTMLInputElement).value);
+    this.confirmUserid = ((document.getElementById("confirmUserid") as HTMLInputElement).value);
     var data = {
       siteId: this.selectedSite,
       applicationId: this.selectedApplication,
       processName: this.selectedProcessId,
       action: this.actionSelected,
+      userName: this.confirmUserid,
+      password: this.confirmPassword,
     };
+    console.log(data);
     if (this.token){
       this.socketSrv.continueSend('doAction', data, this.token);
     }

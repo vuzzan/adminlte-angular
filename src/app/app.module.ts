@@ -33,9 +33,9 @@ import { StoreModule } from '@ngrx/store';
 import { appSettingsReducer } from './store/reducers/app-settings.reducer';
 
 import { Injectable } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localeEn, 'en-EN');
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +68,7 @@ registerLocaleData(localeEn, 'en-EN');
     }),
     NgbModule,
     DataTablesModule,
+    FormsModule      
   ],
   providers: [],
   bootstrap: [AppComponent],
