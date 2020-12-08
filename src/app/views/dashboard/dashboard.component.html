@@ -58,7 +58,7 @@
                 <i class="fa fa-star"></i
                 ><b
                   >{{ site.siteName }} <br />{{ site.info[0]['UP'] }}/{{
-                    site.info[1]['DOWN']
+                    site.info[0]['UP'] + site.info[1]['DOWN']
                   }}</b
                 >
               </a>
@@ -115,7 +115,36 @@
       <span aria-hidden="true">×</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="idActionConfirm" >
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Confirm to do action ? {{ actionSelected }}</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Login ID</label>
+                <input type="text" class="form-control" id="" placeholder="Enter Login ID">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+
+              <button class="btn btn-lg btn-outline-dark" (click)="confirmBack()">Cancel</button>
+              <button class="btn btn-lg btn-primary" (click)="sendAction()">Send Action</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body" *ngIf="idShowInfo">
     <div class="row">
       <div class="col-8">
         <div class="card">
@@ -161,7 +190,7 @@
         <button
           type="button"
           class="btn btn-lg btn-block btn-warning"
-          (click)="sendAction(obj)"
+          (click)="sendActionConfirm(obj)"
           *ngFor="let obj of processInfo.processActions; let i = index"
         >
           {{ obj }}

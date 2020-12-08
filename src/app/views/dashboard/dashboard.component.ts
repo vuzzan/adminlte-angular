@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import Application from '../../classes/application';
 import Site from '../../classes/site';
@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
   private datatableElement: DataTableDirective;
   lastRowIndex = -1;
   dtOptions: DataTables.Settings = {};
-
+  idActionConfirm = false;
+  idShowInfo =  true;
   applicationlist: Array<Application> = [];
   sitelist: Array<Site> = [];
   processlist: Array<Process>;
@@ -300,6 +301,7 @@ export class DashboardComponent implements OnInit {
         },
         // { "orderable": false, "title": "Progress", "data":"applicationPieChartData" , "name":"applicationPieChartData",
         //   "className": "text-left",render: function ( data, type, row ) {
+        //     console.log(row);
         //     var color_code = {
         //       'UP': 'success',
         //       'DOWN': 'danger',
@@ -653,13 +655,24 @@ export class DashboardComponent implements OnInit {
   //   this.stopProcessList();
   //   this.getApplicationList();
   // }
-  sendAction(action) {
+  actionSelected = "";
+  sendActionConfirm(action){
+    this.idActionConfirm = true;
+    this.idShowInfo = false;
+    this.actionSelected = action;
+  }
+  confirmBack(){
+    this.actionSelected = "";
+    this.idActionConfirm = false;
+    this.idShowInfo = true;
+  }
+  sendAction() {
     //console.log("action=["+action+"]");
     var data = {
       siteId: this.selectedSite,
       applicationId: this.selectedApplication,
       processName: this.selectedProcessId,
-      action: action,
+      action: this.actionSelected,
     };
     alert('DEBUG: Send doAction: ' + JSON.stringify(data));
     this.socketSrv.continueSend('doAction', data, this.token);
