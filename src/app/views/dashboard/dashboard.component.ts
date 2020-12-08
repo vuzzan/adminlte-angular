@@ -580,6 +580,7 @@ export class DashboardComponent implements OnInit {
   getProcessList(applicationId) {
     this.loading = true;
     if (this.token) {
+      this.selectedApplication = applicationId;
       //this.socketSrv.continueSend('getProcessList',{siteId:this.selectedSite,applicationId:this.selectedApplication},this.token);
       this.socketSrv.continueSend(
         'getProcessList',
@@ -700,6 +701,7 @@ export class DashboardComponent implements OnInit {
       userName: this.confirmUserid,
       password: this.confirmPassword,
     };
+    console.log(this.selectedApplication);
     console.log(data);
     if (this.token){
       this.socketSrv.continueSend('doAction', data, this.token);
