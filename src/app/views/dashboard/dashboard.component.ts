@@ -14,6 +14,7 @@ import * as SettingsActions from '../../store/actions/app-settings.actions';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import ProcessDef from '../../classes/process';
 import { now } from 'jquery';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit {
     info: [],
     colour: '',
   };
+  doActionContent:any;
 
   doFlip: Boolean = false;
   updatedTime: String;
@@ -69,7 +71,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private store: Store<AppState>,
     private tokenSrv: TokenService,
-    public appService: AppService
+    public appService: AppService,
+    private toastr: ToastrService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.cimWebUserId = params['userid'];
@@ -103,6 +106,9 @@ export class DashboardComponent implements OnInit {
           break;
         case 'getProcessInfo':
           this.handleGetProcessInfo(msg);
+          break;
+        case 'doAction':
+          this.handleDoAction(msg);
           break;
       }
     });
@@ -603,6 +609,18 @@ export class DashboardComponent implements OnInit {
       this.throwError(msg.statusCode, msg.statusMsg);
     }
   }
+
+  
+  handleDoAction(msg) {
+    if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
+      this.show = false;
+      this.doActionContent = msg.content;
+      console.log( this.doActionContent );
+      this.toastr.success('Trigger doAction sucessful...');
+    } else {
+      this.throwError(msg.statusCode, msg.statusMsg);
+    }
+  }
   handleGetProcessInfo(msg) {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
@@ -629,11 +647,12 @@ export class DashboardComponent implements OnInit {
     this.code = 'Error Code ' + code + ':';
     this.msg = msg;
     this.type = 'alert';
+    this.toastr.error(''+this.msg);
   }
 
-  rotateItem(application) {
-    application.doFlip = !application.doFlip;
-  }
+  // rotateItem(application) {
+  //   application.doFlip = !application.doFlip;
+  // }
 
   // selectSite(site){
   //   this.selectedSite = site.siteId;
@@ -667,14 +686,14 @@ export class DashboardComponent implements OnInit {
     this.idShowInfo = true;
   }
   sendAction() {
-    //console.log("action=["+action+"]");
     var data = {
       siteId: this.selectedSite,
       applicationId: this.selectedApplication,
       processName: this.selectedProcessId,
       action: this.actionSelected,
     };
-    alert('DEBUG: Send doAction: ' + JSON.stringify(data));
-    this.socketSrv.continueSend('doAction', data, this.token);
+    if (this.token){
+      this.socketSrv.continueSend('doAction', data, this.token);
+    }
   }
 }

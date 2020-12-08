@@ -30,12 +30,14 @@
             "styles": [
               "src/styles.scss",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
-              "node_modules/admin-lte/dist/css/adminlte.css"
+              "node_modules/admin-lte/dist/css/adminlte.css",
+              "node_modules/toastr/build/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
-              "node_modules/admin-lte/dist/js/adminlte.js"
+              "node_modules/admin-lte/dist/js/adminlte.js",
+              "node_modules/toastr/build/toastr.js"
             ]
           },
           "configurations": {

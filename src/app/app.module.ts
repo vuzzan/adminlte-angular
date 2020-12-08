@@ -60,7 +60,7 @@ registerLocaleData(localeEn, 'en-EN');
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
     StoreModule.forRoot({
