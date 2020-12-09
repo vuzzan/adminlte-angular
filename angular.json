@@ -37,7 +37,7 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/admin-lte/dist/js/adminlte.js",
-              "node_modules/toastr/build/toastr.js"
+              "node_modules/toastr/build/toastr.min.js"
             ]
           },
           "configurations": {

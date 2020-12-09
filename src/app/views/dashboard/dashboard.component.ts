@@ -289,7 +289,7 @@ export class DashboardComponent implements OnInit {
             var color_code = {
               UP: 'success',
               DOWN: 'danger',
-              UNKNOWN: 'info',
+              UNKNOWN: 'warning',
               BUSY: 'primary',
               WARNING: 'warning',
             };
@@ -309,23 +309,31 @@ export class DashboardComponent implements OnInit {
           data: 'applicationTotalProcessCount',
           name: 'applicationTotalProcessCount',
         },
-        // { "orderable": false, "title": "Progress", "data":"applicationPieChartData" , "name":"applicationPieChartData",
-        //   "className": "text-left",render: function ( data, type, row ) {
-        //     console.log(row);
-        //     var color_code = {
-        //       'UP': 'success',
-        //       'DOWN': 'danger',
-        //       'UNKNOWN': 'info',
-        //       'BUSY': 'primary',
-        //       'WARNING': 'warning'
-        //     };
-        //     var percen = Math.floor(Math.random() * 100);
-        //     var html = '<div class="progress progress-xs">'+
-        //       '<div class="progress-bar bg-'+color_code[row.applicationState]+'" style="width: '+percen+'%"></div>'+
-        //     '</div>';
-        //     return html;
-        //   }
-        // },
+        { "orderable": false, "title": "Progress", "data":"applicationPieChartData" , "name":"applicationPieChartData",
+          "className": "text-left",render: function ( data, type, row ) {
+            console.log(data);
+            var state = data.labels[0];
+            var values = data.values[0];
+            console.log(values);
+            
+            var percen = 100-values;//Math.floor(values * 100);
+            var backgroundColor = data.colors[0].backgroundColor[0];
+
+            var color_code = {
+              'UP': 'success',
+              'DOWN': 'danger',
+              'UNKNOWN': 'warning',
+              'BUSY': 'primary',
+              'WARNING': 'warning'
+            };
+            var html = '<div class="progress progress-lg">'+
+              '<div class="progress-bar bg-'+color_code[state]+'" style="width: '+percen+'%"></div>'+
+            '</div>'+
+            //'<span class="progress-description">'+values+'% '+'<span class="badge badge-' +color_code[state] + '">' + state + '</span>'
+               "";
+            return html;
+          }
+        },
         {
           orderable: false,
           title: 'Last Update',
