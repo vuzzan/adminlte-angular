@@ -316,7 +316,7 @@ export class DashboardComponent implements OnInit {
             var values = data.values[0];
             console.log(values);
             
-            var percen = 100-values;//Math.floor(values * 100);
+            var percen = values;//Math.floor(values * 100);
             var backgroundColor = data.colors[0].backgroundColor[0];
 
             var color_code = {
