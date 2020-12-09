@@ -67,6 +67,7 @@ export class DashboardComponent implements OnInit {
   appSettings: AppSettings;
   closeResult: string;
   ngZone: any;
+  rowSiteId: any;
 
   constructor(
     private modalService: NgbModal,
@@ -135,10 +136,6 @@ export class DashboardComponent implements OnInit {
     // });
   }
   viewProcessModal(processId, processName, siteId, appId) {
-    // console.log(processId);
-    // console.log(processName);
-    // console.log(siteId);
-    // console.log(appId);
     this.selectedProcessId = processId;
     if (this.token)
       this.socketSrv.continueSend(
@@ -162,13 +159,12 @@ export class DashboardComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  buildTableProcess(
-    index,
+  buildTableProcess(index,
     applicationName,
     applicationState,
     applicationTotalProcessCount
   ) {
-    console.log('buildTableProcess call ...');
+    console.log('buildTableProcess call ..');
     var appSettings = {
       siteUpdated: false,
       applicationId: applicationName,
@@ -186,6 +182,7 @@ export class DashboardComponent implements OnInit {
     // }
     // this.store.dispatch(new SettingsActions.Update(appSettings));
     setTimeout(() => {
+      this.rowSiteId = d.siteId;
       this.buildTableProcess(
         this.lastRowIndex,
         d.applicationName,
@@ -233,16 +230,15 @@ export class DashboardComponent implements OnInit {
           this.appSettings != undefined &&
           settings.applicationUpdated == true
         ) {
-          this.getProcessList(settings.applicationId);
-          //console.log("UPDATE LIST TABLE....settings.applicationUpdated="+settings.applicationUpdated)
+          this.getProcessList(this.rowSiteId, settings.applicationId);
           this.appSettings = settings;
-          //this.updateTableIndex();
         } else {
           if (
             this.appSettings != undefined &&
             settings.processUpdated == true
           ) {
             this.appSettings = settings;
+
             this.updateTableIndex();
           } else {
             if (
@@ -263,18 +259,18 @@ export class DashboardComponent implements OnInit {
       //ajax: 'assets/listapp.json',
       data: this.applicationlist,
       columns: [
-        { orderable: false, title: 'Site Id', width: '5%', data: 'siteId' },
+        { orderable: false, title: 'Site', width: '5%', data: 'siteId' },
         {
           orderable: false,
           className: 'text-center details-control',
-          title: 'App Id',
+          title: 'Application',
           width: '2%',
           data: 'applicationId',
         },
         {
           orderable: false,
           className: 'text-center details-control',
-          title: 'App Name',
+          title: 'Application Name',
           width: '30%',
           data: 'applicationName',
           name: 'applicationName',
@@ -294,7 +290,7 @@ export class DashboardComponent implements OnInit {
               WARNING: 'warning',
             };
             var html =
-              '<span class="badge badge-' +
+              '<span class="badge badge-lg badge-' +
               color_code[data] +
               '">' +
               data +
@@ -311,14 +307,7 @@ export class DashboardComponent implements OnInit {
         },
         { "orderable": false, "title": "Progress", "data":"applicationPieChartData" , "name":"applicationPieChartData",
           "className": "text-left",render: function ( data, type, row ) {
-            console.log(data);
-            var state = data.labels[0];
-            var values = data.values[0];
-            console.log(values);
-            
-            var percen = values;//Math.floor(values * 100);
-            var backgroundColor = data.colors[0].backgroundColor[0];
-
+            //console.log(data);
             var color_code = {
               'UP': 'success',
               'DOWN': 'danger',
@@ -326,11 +315,19 @@ export class DashboardComponent implements OnInit {
               'BUSY': 'primary',
               'WARNING': 'warning'
             };
-            var html = '<div class="progress progress-lg">'+
-              '<div class="progress-bar bg-'+color_code[state]+'" style="width: '+percen+'%"></div>'+
-            '</div>'+
-            //'<span class="progress-description">'+values+'% '+'<span class="badge badge-' +color_code[state] + '">' + state + '</span>'
-               "";
+            
+            var total = row.applicationTotalProcessCount;
+            var html = '<div class="progress progress-lg">';
+            for(var i=0; i< data.labels.length; i++ ){
+              var color = color_code[data.labels[i]];
+              //console.log(data.labels[i]);
+              var percen = Math.floor(100* (data.values[i]/total));
+              html += '<div class="progress-bar bg-'+color+'" role="progressbar" style="width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
+              percen+'%</div>';
+            }
+            html += '</div>';
+            //console.log(html);
+            var backgroundColor = data.colors[0].backgroundColor[0];
             return html;
           }
         },
@@ -345,6 +342,28 @@ export class DashboardComponent implements OnInit {
             return html;
           },
         },
+        // {
+        //   orderable: false,
+        //     title: 'Function',
+        //     data: 'info',
+        //     name: 'info',
+        //     className: 'text-center',
+        //     render: function (data, type, row) {
+        //       // console.log(row);
+        //       //viewProcessModal: (processId, processName, siteId, appId) =>
+        //       var html =
+        //         '<button class="btn btn-sm btn-primary" style="margin-left: 5px;" onclick="viewProcessModal(' +
+        //         "'','',"+
+        //         "'" +
+        //         row.siteId +
+        //         "'," +
+        //         "'" +
+        //         row.applicationId +
+        //         "'" +
+        //         ')">View</button>';
+        //       return html;
+        //     },
+        // },
       ],
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
@@ -569,13 +588,25 @@ export class DashboardComponent implements OnInit {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.applicationlist = msg.content;
       this.show = false;
-      //console.log(this.appSettings);
+      console.log(this.appSettings);
       var appSettings = {
         applicationlist: [],
         siteUpdated: true,
       };
       this.applicationlist.forEach((obj) => {
-        obj['siteId'] = this.appSettings.siteId;
+        // if(this.appSettings.siteId=='ALL SITES' && obj['siteId']==undefined){
+        //   var randomSite = Math.floor(Math.random() * Math.floor(this.appSettings.sitelist.length));
+        //   if(randomSite==0){
+        //     randomSite++;
+        //   }
+        //   obj['siteId'] = this.appSettings.sitelist[randomSite].siteId;
+        // }
+        // else
+        //{
+          if(obj['siteId']==undefined){
+            //obj['siteId'] = this.selectedSite;
+          }
+        //}
 
         appSettings.applicationlist.push(obj);
       });
@@ -585,15 +616,14 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  getProcessList(applicationId) {
+  getProcessList(siteId,applicationId) {
     this.loading = true;
     if (this.token) {
       this.selectedApplication = applicationId;
-      //this.socketSrv.continueSend('getProcessList',{siteId:this.selectedSite,applicationId:this.selectedApplication},this.token);
       this.socketSrv.continueSend(
         'getProcessList',
         {
-          siteId: this.appSettings.siteId,
+          siteId: this.rowSiteId,
           applicationId: applicationId,
         },
         this.token
@@ -634,6 +664,7 @@ export class DashboardComponent implements OnInit {
       this.throwError(msg.statusCode, msg.statusMsg);
     }
   }
+
   handleGetProcessInfo(msg) {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
@@ -709,8 +740,8 @@ export class DashboardComponent implements OnInit {
       userName: this.confirmUserid,
       password: this.confirmPassword,
     };
-    console.log(this.selectedApplication);
-    console.log(data);
+    // console.log(this.selectedApplication);
+    // console.log(data);
     if (this.token){
       this.socketSrv.continueSend('doAction', data, this.token);
     }
