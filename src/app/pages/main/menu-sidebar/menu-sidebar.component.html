@@ -56,7 +56,8 @@
                       : 'warning'
                   }}"
                   >{{ site.siteState }} {{ site.info[0]['UP'] }}/{{
-                    site.info[1]['DOWN']
+                    site.info[0]['UP'] + site.info[1]['DOWN']
+                  }}
                   }}</span
                 >
               </a>
