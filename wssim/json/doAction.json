@@ -1,0 +1,17 @@
+{
+   "txnId":"89c3a2a7-cf4c-46b0-8ae6-6db195db884d",
+   "token":"P5ZwQzUEe3mIhlOUnfPSdg==",
+   "userId":"masdashboard",
+   "txnName":"doAction",
+   "txnDate":"Tue Dec 08 2020 10:21:39 GMT+0800 (Singapore Standard Time)",
+   "content":{
+      "siteId":"AMK",
+      "applicationId":"Replica",
+      "processName":"Replica",
+      "action":"1. (Jsize<=5000)Monitor",
+      "userName":"USERNAME",
+      "id":"PASSWORD"
+   },
+   "statusCode":1,
+   "statusMsg":"Authentication failed for user: abc"
+}
