@@ -178,8 +178,12 @@
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr>
-                <th style="width: 50%;">Site ID</th>
+              <tr *ngIf="selectedProcessId==''">
+                <th style="width: 50%;" >Site ID</th>
+                <td>{{ appInfo.siteId }}</td>
+              </tr>
+              <tr *ngIf="selectedProcessId!=''">
+                <th style="width: 50%;" >Site ID</th>
                 <td>{{ appSettings.siteId }}</td>
               </tr>
               <tr *ngIf="selectedProcessId!=''">
