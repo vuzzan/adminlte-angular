@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
     info: [],
     colour: '',
   };
+  appInfo: any;
   doActionContent:any;
   
   confirmUserid:String = "";
@@ -135,9 +136,16 @@ export class DashboardComponent implements OnInit {
     //   console.log(this.closeResult);
     // });
   }
+
+  viewApplicationModal(data) {
+    this.selectedProcessId = "";
+    this.open();
+  }
+
   viewProcessModal(processId, processName, siteId, appId) {
+    console.log("viewProcessModal call");
     this.selectedProcessId = processId;
-    if (this.token)
+    if (this.token){
       this.socketSrv.continueSend(
         'getProcessInfo',
         {
@@ -147,6 +155,7 @@ export class DashboardComponent implements OnInit {
         },
         this.token
       );
+    }
     this.open();
     // console.log("Modal open done...");
   }
@@ -262,14 +271,14 @@ export class DashboardComponent implements OnInit {
         { orderable: false, title: 'Site', width: '5%', data: 'siteId' },
         {
           orderable: false,
-          className: 'text-center details-control',
+          className: 'text-center',
           title: 'Application',
           width: '2%',
           data: 'applicationId',
         },
         {
           orderable: false,
-          className: 'text-center details-control',
+          className: 'text-center',
           title: 'Application Name',
           width: '30%',
           data: 'applicationName',
@@ -277,7 +286,7 @@ export class DashboardComponent implements OnInit {
         },
         {
           orderable: false,
-          className: 'text-center details-control',
+          className: 'text-center',
           title: 'State',
           data: 'applicationState',
           name: 'applicationState',
@@ -342,40 +351,35 @@ export class DashboardComponent implements OnInit {
             return html;
           },
         },
-        // {
-        //   orderable: false,
-        //     title: 'Function',
-        //     data: 'info',
-        //     name: 'info',
-        //     className: 'text-center',
-        //     render: function (data, type, row) {
-        //       // console.log(row);
-        //       //viewProcessModal: (processId, processName, siteId, appId) =>
-        //       var html =
-        //         '<button class="btn btn-sm btn-primary" style="margin-left: 5px;" onclick="viewProcessModal(' +
-        //         "'','',"+
-        //         "'" +
-        //         row.siteId +
-        //         "'," +
-        //         "'" +
-        //         row.applicationId +
-        //         "'" +
-        //         ')">View</button>';
-        //       return html;
-        //     },
-        // },
+        {
+          orderable: false,
+            title: 'Function',
+            data: 'info',
+            name: 'info',
+            className: 'text-center',
+            render: function (data, type, row) {
+              var html =
+                '<button class="btn btn-sm btn-primary" style="margin-left: 5px;">View</button>';
+              return html;
+            },
+        },
       ],
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
-        $('td', row).unbind('click');
-        $('td', row).bind('click', () => {
+        $('td:eq( 7 )', row).unbind('click');
+        $('td:eq( 7 )', row).bind('click', () => {
+          //console.log(data);
+          this.appInfo = data;
+          this.viewApplicationModal(data);
+        });
+        $('td:lt(7 )', row).unbind('click');
+        $('td:lt(7 )', row).bind('click', () => {
           this.datatableElement.dtInstance.then(
             (dtInstance: DataTables.Api) => {
               var table = dtInstance;
               if (this.lastRowIndex > -1 && this.lastRowIndex != index) {
                 var row_select_old = table.row(this.lastRowIndex);
                 if (row_select_old.child.isShown()) {
-                  //console.log("====================================Hide +row_select.child.isShown() =====================================");
                   row_select_old.child().hide();
                 }
               }
@@ -383,10 +387,8 @@ export class DashboardComponent implements OnInit {
               var row_select = table.row(index);
               var tr = $(this).parents('tr');
               if (row_select.child.isShown()) {
-                //console.log("===================Hide +row_select.child.isShown()="+row_select.child.isShown()+" index="+index);
                 row_select.child('').hide();
               } else {
-                //console.log("SHOW +row_select.child.isShown()="+row_select.child.isShown()+" index="+index);
                 row_select.child(this.format(data)).show();
               }
             }
@@ -408,8 +410,6 @@ export class DashboardComponent implements OnInit {
   }
 
   updateTableIndex() {
-    //console.log("updateTableIndex " + "#datatable_table_process_"+this.lastRowIndex);
-    //console.log(this.appSettings.processlist);
     var siteId = this.appSettings.siteId;
     var appId = this.appSettings.applicationId;
     if (
