@@ -332,7 +332,7 @@ export class DashboardComponent implements OnInit {
               //console.log(data.labels[i]);
               var percen = Math.floor(100* (data.values[i]/total));
               html += '<div class="progress-bar bg-'+color+'" role="progressbar" style="width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
-              percen+'%</div>';
+              data.values[i]+'</div>';
             }
             html += '</div>';
             //console.log(html);
