@@ -113,6 +113,9 @@ export class DashboardComponent implements OnInit {
         case 'getProcessInfo':
           this.handleGetProcessInfo(msg);
           break;
+          case 'getApplicationInfo':
+            this.handleApplicationInfo(msg);
+            break;
         case 'doAction':
           this.handleDoAction(msg);
           break;
@@ -138,7 +141,19 @@ export class DashboardComponent implements OnInit {
   }
 
   viewApplicationModal(data) {
+    console.log("viewApplicationModal call");
+    console.log(data);
     this.selectedProcessId = "";
+    if (this.token){
+      this.socketSrv.continueSend(
+        'getApplicationInfo',
+        {
+          siteId: data.siteId,
+          applicationId: data.applicationId,
+        },
+        this.token
+      );
+    }
     this.open();
   }
 
@@ -250,14 +265,14 @@ export class DashboardComponent implements OnInit {
 
             this.updateTableIndex();
           } else {
-            if (
-              this.appSettings != undefined &&
-              settings.processInfoUpdated == true
-            ) {
-              console.log('UPDATE PROCESS INFO....');
-              this.processInfo = settings.processInfo[0];
-              this.appSettings = settings;
-            }
+            // if (
+            //   this.appSettings != undefined &&
+            //   settings.processInfoUpdated == true
+            // ) {
+            //   console.log('UPDATE PROCESS INFO....');
+            //   this.processInfo = settings.processInfo[0];
+            //   this.appSettings = settings;
+            // }
           }
         }
       }
@@ -594,20 +609,6 @@ export class DashboardComponent implements OnInit {
         siteUpdated: true,
       };
       this.applicationlist.forEach((obj) => {
-        // if(this.appSettings.siteId=='ALL SITES' && obj['siteId']==undefined){
-        //   var randomSite = Math.floor(Math.random() * Math.floor(this.appSettings.sitelist.length));
-        //   if(randomSite==0){
-        //     randomSite++;
-        //   }
-        //   obj['siteId'] = this.appSettings.sitelist[randomSite].siteId;
-        // }
-        // else
-        //{
-          if(obj['siteId']==undefined){
-            //obj['siteId'] = this.selectedSite;
-          }
-        //}
-
         appSettings.applicationlist.push(obj);
       });
       this.store.dispatch(new SettingsActions.Update(appSettings));
@@ -664,24 +665,36 @@ export class DashboardComponent implements OnInit {
       this.throwError(msg.statusCode, msg.statusMsg);
     }
   }
-
-  handleGetProcessInfo(msg) {
+  handleApplicationInfo(msg){
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
-      this.processInfo = msg.content;
-      var appSettings = {
-        processId: this.selectedProcessId,
-        processInfo: msg.content,
-        processInfoUpdated: true,
-        applicationUpdated: false,
-        siteUpdated: false,
-        processUpdated: false,
-      };
-      this.store.dispatch(new SettingsActions.Update(appSettings));
+      this.appInfo = msg.content[0];
+      console.log(this.appInfo);
+      this.selectedProcessId = "";
     } else {
       this.throwError(msg.statusCode, msg.statusMsg);
     }
   }
+  handleGetProcessInfo(msg) {
+    if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
+      this.show = false;
+      this.processInfo = msg.content[0];
+      this.selectedProcessId = this.processInfo.processId;
+      //console.log(this.processInfo);
+      // var appSettings = {
+      //   processId: this.selectedProcessId,
+      //   processInfo: msg.content,
+      //   processInfoUpdated: true,
+      //   applicationUpdated: false,
+      //   siteUpdated: false,
+      //   processUpdated: false,
+      // };
+      // this.store.dispatch(new SettingsActions.Update(appSettings));
+    } else {
+      this.throwError(msg.statusCode, msg.statusMsg);
+    }
+  }
+
   stopProcessList() {
     if (this.token)
       this.socketSrv.continueSend('stopProcessList', {}, this.token);
