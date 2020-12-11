@@ -32,6 +32,7 @@
     "express": "^4.17.1",
     "ionicons": "2.0.1",
     "jquery": "^3.5.1",
+    "moment": "^2.29.1",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.5",
     "store": "^2.0.12",

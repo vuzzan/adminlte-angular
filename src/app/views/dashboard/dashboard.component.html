@@ -1,21 +1,19 @@
 <div class="content-header">
   <div class="container-fluid">
+    
+
+
+    
+
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">List Site</h3>
             <div class="card-tools">
-              <!-- <span data-toggle="tooltip" class="badge bg-primary"
-                >Last Refresh: 120s ago</span
-              > -->
-              <button
-                type="button"
-                class="btn btn-tool"
-                data-card-widget="maximize"
+              <span data-toggle="tooltip" class="badge bg-primary"
+                >Last Refresh Time: {{lastSiteListTime}}</span
               >
-                <i class="fas fa-expand"></i>
-              </button>
               <button
                 type="button"
                 class="btn btn-tool"
@@ -30,9 +28,9 @@
             <a
               style="
                 border-radius: 20px;
-                height: 80px;
-                min-width: 100px;
-                font-size: 20px;
+                height: {{ site.siteName=='ALL SITES'?'120':'90' }}px;
+                min-width: 120px;
+                font-size: 30px;
               "
               class="btn btn-lg btn-app bg-{{
                 site.siteState == 'UP'
@@ -44,7 +42,6 @@
               *ngFor="let site of sitelist; let i = index"
             >
               <span class="badge bg-white">{{ site.siteState }}</span>
-
               <a
                 (click)="chooseSite(site)"
                 class="btn btn-sm btn-{{
@@ -55,8 +52,7 @@
                     : 'warning'
                 }}"
               >
-                <i class="fa fa-star"></i
-                ><b
+                <b style="font-size: {{ site.siteName=='ALL SITES'?'30':'20' }}px;"
                   >{{ site.siteName }} <br />{{ site.info[0]['UP'] }}/{{
                     site.info[0]['UP'] + site.info[1]['DOWN']
                   }}</b
@@ -105,7 +101,10 @@
 <!-- /.content -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{selectedProcessId!=''?'Process':'Application'}} Information</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{selectedProcessId!=''?(appSettings.siteId +"-" + appSettings.applicationId +"-" + selectedProcessId)
+      :
+      (appInfo.siteId +"-" + appInfo.applicationId)
+    }}</h4>
     <button
       type="button"
       class="close"
@@ -146,91 +145,85 @@
   </div>
   <div class="modal-body" *ngIf="idShowInfo">
     <div class="row">
-      <div class="col-6">
-        <div class="card">
-          <!-- /.card-header -->
-          <div class="card-body table-responsive p-0" style="height: 500px;">
-            <table class="table table-head-fixed text-nowrap">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody *ngIf="selectedProcessId!=''">
-                <tr *ngFor="let obj of processInfo.info; let i = index">
-                  <th style="width: 50%;">{{ obj[0] }}</th>
-                  <td>{{ obj[1] }}</td>
-                </tr>
-              </tbody>
-              <tbody *ngIf="selectedProcessId==''">
-                <tr *ngFor="let obj of appInfo.info; let i = index">
-                  <th style="width: 50%;">111 {{ obj[0] }}</th>
-                  <td>{{ obj[1] }}</td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="col-12">
+        <div class="card card-primary card-tabs">
+          <div class="card-header p-0 pt-1">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item ">
+                <a class="nav-link {{selectedTab ==1?'active':''}}" (click)="selectedTab =1;" >{{selectedProcessId!=''?'Process':'Application'}} Information</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link {{selectedTab ==2?'active':''}}" (click)="selectedTab = 2;" >Action</a>
+              </li>
+            </ul>
           </div>
-          <!-- /.card-body -->
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane fade {{selectedTab ==1?'active show':''}}" *ngIf="selectedTab == 1">
+                <div class="card-body table-responsive p-0" style="height: 300px;">
+                  <table class="table table-head-fixed text-nowrap">
+                    <tbody *ngIf="selectedProcessId!=''">
+                      <tr *ngFor="let obj of processInfo.info; let i = index">
+                        <th style="width: 50%;">{{ obj[0] }}</th>
+                        <td>{{ obj[1] }}</td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="selectedProcessId==''">
+                      <tr *ngFor="let obj of appInfo.info; let i = index">
+                        <th style="width: 50%;">111 {{ obj[0] }}</th>
+                        <td>{{ obj[1] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane fade {{selectedTab ==2?'active show':''}}" *ngIf="selectedTab == 2">
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-head-fixed text-nowrap">
+                      <tbody *ngIf="selectedProcessId!=''">
+                        <tr *ngFor="let obj of processInfo.processActions; let i = index">
+                          <th style="width: 50%;">{{ obj }}</th>
+                          <td><button
+                            type="button"
+                            class="btn btn-block btn-warning"
+                            (click)="sendActionConfirm(obj)"
+                          >
+                          Execute
+                          </button></td>
+                        </tr>
+                      </tbody>
+                      <tbody *ngIf="selectedProcessId==''">
+                        <tr *ngFor="let obj of appInfo.appActions; let i = index">
+                          <th style="width: 50%;">{{ obj }}</th>
+                          <td><button
+                            type="button"
+                            class="btn btn-block btn-warning"
+                            (click)="sendActionConfirm(obj)"
+                          >
+                          Execute
+                          </button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
         </div>
       </div>
-      <div class="col-6">
-        <div class="table-responsive">
-          <table class="table">
-            <tbody>
-              <tr *ngIf="selectedProcessId==''">
-                <th style="width: 50%;" >Site ID</th>
-                <td>{{ appInfo.siteId }}</td>
-              </tr>
-              <tr *ngIf="selectedProcessId!=''">
-                <th style="width: 50%;" >Site ID</th>
-                <td>{{ appSettings.siteId }}</td>
-              </tr>
-              <tr *ngIf="selectedProcessId!=''">
-                <th style="width: 50%;">Application ID</th>
-                <td>{{ appSettings.applicationId }}</td>
-              </tr>
-              <tr *ngIf="selectedProcessId==''">
-                <th style="width: 50%;">Application ID</th>
-                <td>{{ appInfo.applicationId }}</td>
-              </tr>
-              <tr *ngIf="selectedProcessId!=''">
-                <th style="width: 50%;">Process ID</th>
-                <td>{{ processInfo.processId }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div *ngIf="selectedProcessId!=''">
-          <button
+    </div>        
+    
+  </div>
+  <div class="modal-footer">
+    <button
           type="button"
-          class="btn btn-lg btn-block btn-warning"
-          (click)="sendActionConfirm(obj)"
-          
-          *ngFor="let obj of processInfo.processActions; let i = index"
-        >
-          {{ obj }}
-        </button>
-
-        </div>
-        <div *ngIf="selectedProcessId==''">
-        <button
-          type="button"
-          class="btn btn-lg btn-block btn-warning"
-          (click)="sendActionConfirm(obj)"
-          *ngFor="let obj of appInfo.appActions; let i = index"
-        >
-          {{ obj }}
-        </button>
-      </div>
-        <button
-          type="button"
-          class="btn btn-outline-dark btn-lg btn-block"
+          class="btn btn-primary float-right"
           (click)="modal.close('Save click')"
         >
           Close
         </button>
-      </div>
-    </div>
   </div>
 </ng-template>

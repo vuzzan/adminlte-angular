@@ -15,6 +15,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import ProcessDef from '../../classes/process';
 import { now } from 'jquery';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -69,7 +70,9 @@ export class DashboardComponent implements OnInit {
   closeResult: string;
   ngZone: any;
   rowSiteId: any;
-
+  lastSiteListTime: any;
+  selectedTab =1;
+  
   constructor(
     private modalService: NgbModal,
     private socketSrv: SocketService,
@@ -284,13 +287,13 @@ export class DashboardComponent implements OnInit {
       data: this.applicationlist,
       columns: [
         { orderable: false, title: 'Site', width: '5%', data: 'siteId' },
-        {
-          orderable: false,
-          className: 'text-center',
-          title: 'Application',
-          width: '2%',
-          data: 'applicationId',
-        },
+        // {
+        //   orderable: false,
+        //   className: 'text-center',
+        //   title: 'Application',
+        //   width: '2%',
+        //   data: 'applicationId',
+        // },
         {
           orderable: false,
           className: 'text-center',
@@ -329,7 +332,7 @@ export class DashboardComponent implements OnInit {
           data: 'applicationTotalProcessCount',
           name: 'applicationTotalProcessCount',
         },
-        { "orderable": false, "title": "Progress", "data":"applicationPieChartData" , "name":"applicationPieChartData",
+        { "orderable": false, "title": "Status", "data":"applicationPieChartData" , "name":"applicationPieChartData",
           "className": "text-left",render: function ( data, type, row ) {
             //console.log(data);
             var color_code = {
@@ -381,14 +384,14 @@ export class DashboardComponent implements OnInit {
       ],
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
-        $('td:eq( 7 )', row).unbind('click');
-        $('td:eq( 7 )', row).bind('click', () => {
+        $('td:eq( 6 )', row).unbind('click');
+        $('td:eq( 6 )', row).bind('click', () => {
           //console.log(data);
           this.appInfo = data;
           this.viewApplicationModal(data);
         });
-        $('td:lt(7 )', row).unbind('click');
-        $('td:lt(7 )', row).bind('click', () => {
+        $('td:lt(6 )', row).unbind('click');
+        $('td:lt(6 )', row).bind('click', () => {
           this.datatableElement.dtInstance.then(
             (dtInstance: DataTables.Api) => {
               var table = dtInstance;
@@ -422,6 +425,8 @@ export class DashboardComponent implements OnInit {
     };
 
     this.registerClient();
+  
+  
   }
 
   updateTableIndex() {
@@ -458,18 +463,18 @@ export class DashboardComponent implements OnInit {
         },
         // Set column definition initialisation properties.
         columns: [
-          {
-            orderable: false,
-            className: 'text-left',
-            title: 'Process Id',
-            width: '50%',
-            data: 'processId',
-            name: 'processId',
-          },
+          // {
+          //   orderable: false,
+          //   className: 'text-left',
+          //   title: 'Process Id',
+          //   width: '50%',
+          //   data: 'processId',
+          //   name: 'processId',
+          // },
           {
             orderable: false,
             title: 'Process Name',
-            width: '30%',
+            width: '60%',
             data: 'processName',
             name: 'processName',
           },
@@ -528,7 +533,7 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
-
+  
   updateTable() {
     if (this.datatableElement == undefined) {
       return;
@@ -559,6 +564,8 @@ export class DashboardComponent implements OnInit {
 
   getSiteList() {
     this.loading = true;
+    // save time to refresh
+    this.lastSiteListTime = moment().format();
     if (this.token) {
       this.socketSrv.continueSend('getSiteList', {}, this.token);
     }
