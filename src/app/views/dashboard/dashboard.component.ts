@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
   rowSiteId: any;
   lastSiteListTime: any;
   selectedTab =1;
-  
+
   constructor(
     private modalService: NgbModal,
     private socketSrv: SocketService,
@@ -666,8 +666,8 @@ export class DashboardComponent implements OnInit {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
       this.doActionContent = msg.content;
-      console.log( this.doActionContent );
-      this.toastr.success('Trigger doAction sucessful...');
+      //console.log( this.doActionContent );
+      this.toastr.success('Trigger doAction successful...', 'Successful');
     } else {
       this.throwError(msg.statusCode, msg.statusMsg);
     }

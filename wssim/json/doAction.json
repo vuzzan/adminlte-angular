@@ -12,6 +12,6 @@
       "userName":"USERNAME",
       "id":"PASSWORD"
    },
-   "statusCode":1,
-   "statusMsg":"Authentication failed for user: abc"
+   "statusCode":200,
+   "statusMsg":"GOOD Authentication failed for user: abc"
 }
