@@ -36,7 +36,7 @@
               }}"
               *ngFor="let site of sitelist; let i = index"
             >
-              <span class="badge bg-white">{{ site.siteState }}</span>
+              <span class="badge badge-pill badge-primary">{{ site.siteState }}</span>
               <a
                 (click)="chooseSite(site)"
                 class="btn btn-sm btn-{{
@@ -47,7 +47,7 @@
                     : 'warning'
                 }}"
               >
-                <b style="font-size: {{ site.siteName=='ALL SITES'?'30':'20' }}px;"
+                <b style="font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
                   >{{ site.siteName }} <br />{{ site.info[0]['UP'] }}/{{
                     site.info[0]['UP'] + site.info[1]['DOWN']
                   }}</b
@@ -96,10 +96,10 @@
 <!-- /.content -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{selectedProcessId!=''?(appSettings.siteId +"-" + appSettings.applicationId +"-" + selectedProcessId)
+    <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?(appSettings.siteId +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
       :
-      (appInfo.siteId +"-" + appInfo.applicationId)
-    }}</h4>
+      (appInfo.siteId +"] > [" + appInfo.applicationId)
+    }}]</h4>
     <button
       type="button"
       class="close"
