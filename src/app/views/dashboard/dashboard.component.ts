@@ -559,6 +559,7 @@ export class DashboardComponent implements OnInit {
       this.show = false;
     } else {
       this.token = null;
+      this.throwError(msg.statusCode, "ERROR: RegisterClient: " +msg.statusMsg);
     }
   }
 
@@ -586,6 +587,7 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(new SettingsActions.Update(appSettings));
     } else {
       this.sitelist = [];
+      this.throwError(msg.statusCode, "ERROR: getSiteList: " +msg.statusMsg);
     }
   }
 
@@ -621,6 +623,7 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(new SettingsActions.Update(appSettings));
     } else {
       this.applicationlist = [];
+      this.throwError(msg.statusCode, "ERROR: getApplicationList: " +msg.statusMsg);
     }
   }
 
@@ -657,7 +660,7 @@ export class DashboardComponent implements OnInit {
       this.store.dispatch(new SettingsActions.Update(appSettings));
     } else {
       this.processlist = [];
-      this.throwError(msg.statusCode, msg.statusMsg);
+      this.throwError(msg.statusCode, "ERROR: getProcessList: " +msg.statusMsg);
     }
   }
 
@@ -666,10 +669,9 @@ export class DashboardComponent implements OnInit {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
       this.doActionContent = msg.content;
-      //console.log( this.doActionContent );
       this.toastr.success('Trigger doAction successful...', 'Successful');
     } else {
-      this.throwError(msg.statusCode, msg.statusMsg);
+      this.throwError(msg.statusCode, "ERROR: doAction: " +msg.statusMsg);
     }
   }
   handleApplicationInfo(msg){
@@ -679,7 +681,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.appInfo);
       this.selectedProcessId = "";
     } else {
-      this.throwError(msg.statusCode, msg.statusMsg);
+      this.throwError(msg.statusCode, "ERROR: getApplicationInfo: " +msg.statusMsg);
     }
   }
   handleGetProcessInfo(msg) {
@@ -687,18 +689,8 @@ export class DashboardComponent implements OnInit {
       this.show = false;
       this.processInfo = msg.content[0];
       this.selectedProcessId = this.processInfo.processId;
-      //console.log(this.processInfo);
-      // var appSettings = {
-      //   processId: this.selectedProcessId,
-      //   processInfo: msg.content,
-      //   processInfoUpdated: true,
-      //   applicationUpdated: false,
-      //   siteUpdated: false,
-      //   processUpdated: false,
-      // };
-      // this.store.dispatch(new SettingsActions.Update(appSettings));
     } else {
-      this.throwError(msg.statusCode, msg.statusMsg);
+      this.throwError(msg.statusCode, "ERROR: getProcessInfo: " +msg.statusMsg);
     }
   }
 

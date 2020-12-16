@@ -1,49 +1,26 @@
 {
-    "txnId":"d7018fde-cf9d-4886-8298-ee1bdb536daf",
-    "token":"zffDWpNP5V42P3ZPZAB7kQ==",
-    "userId":"masdashboard",
-    "txnName":"getApplicationInfo",
-    "txnDate":"Fri Nov 27 2020 10:41:56 GMT+0800 (Singapore Standard Time)",
-    "statusCode":200,
-    "statusMsg":"OK",
-    "content":[
-       {
-        "siteId":"SITEID",
-        "appActions":[
-           "Start",
-           "Stop"
-        ],
-        "applicationId":"APPID",
-        "applicationName":"APPIDName",
-        "applicationTotalProcessCount":4,
-        "applicationPieChartData":{
-           "colors":[
-              {
-                 "backgroundColor":[
-                    "Coral"
-                 ]
-              }
-           ],
-           "labels":[
-              "UNKNOWN",
-              "UP",
-              "DOWN",
-              "WARNING"
-           ],
-           "values":[
-              1,
-              1,
-              1,
-              1
-           ]
-        },
-        "applicationState":"UNKNOWN",
-        "info":[
-           [
-              "LastUpdate",
-              "01/11/2019 15:56:48"
-           ]
-        ]
-       }
-    ]
+   "statusCode": 200,
+   "statusMsg": "OK",
+   "content": [
+     {
+       "appActions": [
+         "Start",
+         "Stop"
+       ],
+       "siteId": "AMK",
+       "siteName": "AMK",
+       "applicationState": "",
+       "info": [
+         [
+           "DRI",
+           "Thomas"
+         ]
+       ]
+     }
+   ],
+   "txnName": "getApplicationInfo",
+   "txnId": "a19fbb8f-aeac-4fea-89c0-3cab30de0a3d",
+   "token": "MPE7YKns0GJugNoHojrWcQ==",
+   "userId": "masdashboard",
+   "txnDate": "Tue Dec 15 2020 09:47:56 GMT+0800 (Singapore Standard Time)"
  }

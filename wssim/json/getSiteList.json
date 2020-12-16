@@ -1,24 +1,28 @@
 {
-   "txnId":"4e03f861-2738-4832-b9b6-113ed0c1c9ee",
-   "token":"eZLhoolwuzy+cfs2nCM70A==",
+   "txnId":"c2de5776-cb5c-4f3e-a359-2c656eaad847",
+   "token":"vw0UJRWL/eYOJe1zuNEGuQ==",
    "userId":"masdashboard",
    "txnName":"getSiteList",
-   "txnDate":"Thu Jan 16 2020 17:03:43 GMT+0800 (Singapore Standard Time)",
+   "txnDate":"Wed Dec 16 2020 13:28:13 GMT+0800 (Singapore Standard Time)",
    "statusCode":200,
    "statusMsg":"OK",
    "content":[
       {
-         "siteId":"ALL",
+         "siteId":"ALL SITES",
          "siteName":"ALL SITES",
-         "siteState":"UP",
+         "siteState":"DOWN",
          "info":[
             {
-               "UP":71
+               "UP":42
             },
             {
-               "DOWN":4
+               "WARNING":1
+            },
+            {
+               "DOWN":1
             }
-         ]
+         ],
+         "label":"42/44"
       },
       {
          "siteId":"AMK",
@@ -26,38 +30,38 @@
          "siteState":"DOWN",
          "info":[
             {
-               "UP":71
+               "UP":39
             },
             {
-               "DOWN":4
-            }
-         ]
-      },
-      {
-         "siteId":"WDL",
-         "siteName":"WDL",
-         "siteState":"UP",
-         "info":[
-            {
-               "UP":71
+               "WARNING":1
             },
             {
-               "DOWN":4
+               "DOWN":1
             }
-         ]
+         ],
+         "label":"39/41"
       },
       {
          "siteId":"TMP",
          "siteName":"TMP",
-         "siteState":"WARNING",
+         "siteState":"UP",
          "info":[
             {
-               "UP":71
-            },
-            {
-               "DOWN":4
+               "UP":1
             }
-         ]
+         ],
+         "label":"1/1"
+      },
+      {
+         "siteId":"WLD",
+         "siteName":"WLD",
+         "siteState":"UP",
+         "info":[
+            {
+               "UP":2
+            }
+         ],
+         "label":"2/2"
       }
    ]
 }

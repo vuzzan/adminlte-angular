@@ -3,6 +3,7 @@ import Transaction from '../classes/transaction'
 import { Observable } from 'rxjs';
 import * as uuid from 'uuid';
 import {environment} from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,9 @@ import {environment} from '../../environments/environment';
 export class SocketService {
   private ws :any;
 
-  constructor() { 
+  constructor(private toastr: ToastrService) { 
     if(!this.ws)
     {
-      console.log("1New websocket: " +environment.socket_url)
       this.newConn(this.ws);
     }
       else
@@ -21,12 +21,18 @@ export class SocketService {
   }
 
   newConn (ws:any){
-    console.log("New websocket: " +environment.socket_url)
-    //ws = new WebSocket(environment.socket_url);
+    console.log("New websocket")
     try {
-      this.ws = new WebSocket(environment.socket_url);
+      // try {
+        this.ws = new WebSocket(environment.socket_url);
+        //ws = new WebSocket('ws://'+ host + ':' + port + '/');
+      // }
+      // catch (err) {
+      //   console.log('This never prints');
+      // }
       this.ws.onclose = function(){
         /// try to reconnect websocket in 5 seconds
+        this.toastr.error('loss connection', 'websocket');
         console.log ("loss connection");
         setTimeout(function(){
           console.log ("retry connect...3s....................");
@@ -34,10 +40,12 @@ export class SocketService {
         }, 3000);
       };
       this.ws.onopen = function () {
-        console.log('WebSocket connected')
+        this.toastr.success('Websocket connect', 'websocket');
+        //console.log('WebSocket connected')
       }
     }
     catch(err) {
+      this.toastr.error('loss connection', 'websocket');
       console.log("Error");
       setTimeout(function(){
         console.log ("retry connect...3s....................");

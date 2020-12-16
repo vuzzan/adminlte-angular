@@ -1,96 +1,84 @@
 {
-   "txnId":"d7018fde-cf9d-4886-8298-ee1bdb536daf",
-   "token":"zffDWpNP5V42P3ZPZAB7kQ==",
-   "userId":"masdashboard",
-   "txnName":"getProcessInfo",
-   "txnDate":"Fri Nov 27 2020 10:41:56 GMT+0800 (Singapore Standard Time)",
-   "statusCode":200,
-   "statusMsg":"OK",
-   "content":[
-      {
-         "processActions":[
-            "Start",
-            "Stop",
-            "1. (Jsize<=5000)Monitor",
-            "2. (Jsize>5000) Inform DRI"
+   "statusCode": 200,
+   "statusMsg": "OK",
+   "content": [
+     {
+       "processActions": [
+         "Start",
+         "Stop"
+       ],
+       "siteId": "AMK",
+       "siteName": "AMK",
+       "processId": "ASP-502",
+       "processName": "ASP-502",
+       "processState": "UP",
+       "info": [
+         [
+           "AppGroup",
+           "EAP_SERVER"
          ],
-         "processId":"PROCESSID",
-         "processName":"SITEID APPID",
-         "processState":"UP",
-         "info":[
-            [
-               "LastUpdate",
-               "2020-11-27 10:41:20"
-            ],
-            [
-               "Reason",
-               "Journal Size is Low : 0"
-            ],
-            [
-               "status",
-               "UP"
-            ],
-            [
-               "AppGroup",
-               "AutoSched"
-            ],
-            [
-               "AppName",
-               "AutoSched-SAM2142"
-            ],
-            [
-               "Beacon",
-               "beacon"
-            ],
-            [
-               "ComputerName",
-               "SAM2142"
-            ],
-            [
-               "Ipv4Addr",
-               "10.132.112.42"
-            ],
-            [
-               "KernelCpu",
-               "0"
-            ],
-            [
-               "PID",
-               "7204"
-            ],
-            [
-               "PeakWorkingSet",
-               "144674816"
-            ],
-            [
-               "SiteId",
-               "AMK"
-            ],
-            [
-               "State",
-               "Running"
-            ],
-            [
-               "UserCpu",
-               "0"
-            ],
-            [
-               "WorkingSet",
-               "144093184"
-            ],
-            [
-               "fromEntity",
-               "AutoSched-SAM2142"
-            ],
-            [
-               "nCPU",
-               "4"
-            ],
-            [
-               "timeStamp",
-               "01-Nov-2019 15:56:48"
-            ]
+         [
+           "AppName",
+           "ASP-502"
+         ],
+         [
+           "Beacon",
+           "beacon"
+         ],
+         [
+           "ComputerName",
+           "SAM2135"
+         ],
+         [
+           "Ipv4Addr",
+           "10.132.112.35"
+         ],
+         [
+           "KernelCpu",
+           "0"
+         ],
+         [
+           "PID",
+           "9880"
+         ],
+         [
+           "PeakWorkingSet",
+           "29466624"
+         ],
+         [
+           "SiteId",
+           "AMK"
+         ],
+         [
+           "State",
+           "Running"
+         ],
+         [
+           "UserCpu",
+           "0"
+         ],
+         [
+           "WorkingSet",
+           "29200384"
+         ],
+         [
+           "fromEntity",
+           "ASP-502"
+         ],
+         [
+           "nCPU",
+           "16"
+         ],
+         [
+           "timeStamp",
+           "15-Dec-2020 12:05:27"
          ]
-      }
-   ]
-}
+       ]
+     }
+   ],
+   "txnName": "getProcessInfo",
+   "txnId": "a19fbb8f-aeac-4fea-89c0-3cab30de0a3d",
+   "token": "MPE7YKns0GJugNoHojrWcQ==",
+   "userId": "masdashboard",
+   "txnDate": "Tue Dec 15 2020 09:47:56 GMT+0800 (Singapore Standard Time)"
+ }

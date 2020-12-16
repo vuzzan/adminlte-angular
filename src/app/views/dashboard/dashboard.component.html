@@ -48,9 +48,7 @@
                 }}"
               >
                 <b style="font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
-                  >{{ site.siteName }} <br />{{ site.info[0]['UP'] }}/{{
-                    site.info[0]['UP'] + site.info[1]['DOWN']
-                  }}</b
+                  >{{ site.siteName }} <br /> {{ site.label }}</b
                 >
               </a>
             </a>
@@ -98,7 +96,7 @@
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?(appSettings.siteId +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
       :
-      (appInfo.siteId +"] > [" + appInfo.applicationId)
+      (appInfo.siteId +"] > [" + (appInfo.applicationId==undefined?selectedApplication:appInfo.applicationId) )
     }}]</h4>
     <button
       type="button"
