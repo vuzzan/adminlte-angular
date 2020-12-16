@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,10 @@ import { appSettingsReducer } from './store/reducers/app-settings.reducer';
 
 import { Injectable } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
+
+import { PreloadFactory } from "./preload-service.factory";
+import { ConfigLoaderService } from './config-loader.service';
 
 registerLocaleData(localeEn, 'en-EN');
 @NgModule({
@@ -68,9 +72,21 @@ registerLocaleData(localeEn, 'en-EN');
     }),
     NgbModule,
     DataTablesModule,
-    FormsModule      
+    FormsModule,
+    HttpClientModule
+
   ],
-  providers: [],
+  providers: [
+    ConfigLoaderService,
+    {
+      provide: APP_INITIALIZER,
+      deps: [
+        ConfigLoaderService
+      ],
+      multi: true,
+      useFactory: PreloadFactory
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

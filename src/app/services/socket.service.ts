@@ -4,14 +4,19 @@ import { Observable } from 'rxjs';
 import * as uuid from 'uuid';
 import {environment} from '../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { ConfigLoaderService } from '../config-loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
   private ws :any;
-
-  constructor(private toastr: ToastrService) { 
+  socket_url:string;
+  constructor(private toastr: ToastrService, private configLoaderService: ConfigLoaderService) { 
+    this.socket_url = this.configLoaderService.socket_url;
+    if(this.socket_url==''){
+      this.socket_url = environment.socket_url;
+    }
     if(!this.ws)
     {
       this.newConn(this.ws);
@@ -21,15 +26,9 @@ export class SocketService {
   }
 
   newConn (ws:any){
-    console.log("New websocket")
+    console.log("New websocket: "+this.socket_url)
     try {
-      // try {
-        this.ws = new WebSocket(environment.socket_url);
-        //ws = new WebSocket('ws://'+ host + ':' + port + '/');
-      // }
-      // catch (err) {
-      //   console.log('This never prints');
-      // }
+      this.ws = new WebSocket(this.socket_url);
       this.ws.onclose = function(){
         /// try to reconnect websocket in 5 seconds
         this.toastr.error('loss connection', 'websocket');
