@@ -36,25 +36,14 @@
             <li class="nav-item" *ngFor="let site of sitelist; let i = index">
               <a (click)="chooseSite(site)" class="nav-link"
                 ><i
-                  class="far fa-circle nav-icon text-{{
-                    site.siteState == 'UP'
-                      ? 'success'
-                      : site.siteState == 'DOWN'
-                      ? 'danger'
-                      : 'warning'
-                  }}"
-                  [ngStyle]="{ color: site.colour }"
+                  class="far fa-circle nav-icon"
+                  [ngStyle]="{ color: site.backgroundColor }"
                 >
                 </i>
                 <p>{{ site.siteName }}</p>
                 <span
-                  class="right badge badge-{{
-                    site.siteState == 'UP'
-                      ? 'success'
-                      : site.siteState == 'DOWN'
-                      ? 'danger'
-                      : 'warning'
-                  }}"
+                  style="background-color:{{ site.backgroundColor }};color: {{ site.fontColor }};"
+                  class="right badge"
                   >{{ site.siteState }} {{ site.label }}
                   </span
                 >
