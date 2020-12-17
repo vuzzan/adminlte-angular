@@ -1,623 +1,572 @@
 {
-   "txnId": "3186cd29-174f-4511-ba5d-f4695f588922",
-   "token": "vw0UJRWL/eYOJe1zuNEGuQ==",
-   "userId": "masdashboard",
-   "txnName": "getApplicationList",
-   "txnDate": "Wed Dec 16 2020 13:31:50 GMT+0800 (Singapore Standard Time)",
-   "statusCode": 200,
-   "statusMsg": "OK",
-   "content": [
+  "txnId":"2f58f8a1-4445-4008-a89e-df34b252ae28",
+  "token":"hnL4soOiwRKIa/GVu2mAmQ==",
+  "userId":"masdashboard",
+  "txnName":"getApplicationList",
+  "txnDate":"Thu Dec 17 2020 13:06:17 GMT+0800 (Singapore Standard Time)",
+  "statusCode":200,
+  "statusMsg":"OK",
+  "content":[
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "EAP_SERVER",
-       "applicationName": "EAP_SERVER",
-       "applicationTotalProcessCount": 16,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse",
-               "Red"
-             ]
-           }
-         ],
-         "labels": [
-           "UP",
-           "DOWN"
-         ],
-         "values": [
-           15,
-           1
-         ]
-       },
-       "applicationState": "DOWN",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:47"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"EAP_SERVER",
+        "applicationName":"EAP_SERVER",
+        "backgroundColor":"Red",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":16,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse",
+                    "Red"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP",
+              "DOWN"
+           ],
+           "values":[
+              10,
+              6
+           ]
+        },
+        "applicationState":"DOWN",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:13"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "AutoSched",
-       "applicationName": "AutoSched",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Yellow"
-             ]
-           }
-         ],
-         "labels": [
-           "WARNING"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "WARNING",
-       "info": [
-         [
-           "LastUpdate",
-           "21/10/2020 18:08:10"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"AutoSched",
+        "applicationName":"AutoSched",
+        "backgroundColor":"Yellow",
+        "fontColor":"BLACK",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Yellow"
+                 ]
+              }
+           ],
+           "labels":[
+              "WARNING"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"WARNING",
+        "info":[
+           [
+              "LastUpdate",
+              "21/10/2020 18:08:10"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "CimWeb",
-       "applicationName": "CimWeb",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:22:47"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"CimWeb",
+        "applicationName":"CimWeb",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:00:52"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "FEMonitorSvc",
-       "applicationName": "FEMonitorSvc",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:48"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"FEMonitorSvc",
+        "applicationName":"FEMonitorSvc",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "MaterialServer",
-       "applicationName": "MaterialServer",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Grey"
-             ]
-           }
-         ],
-         "labels": [
-           "UNKNOWN"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UNKNOWN",
-       "info": [
-         [
-           "LastUpdate",
-           "22/10/2020 10:42:36"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"MaterialServer",
+        "applicationName":"MaterialServer",
+        "backgroundColor":"Grey",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Grey"
+                 ]
+              }
+           ],
+           "labels":[
+              "UNKNOWN"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UNKNOWN",
+        "info":[
+           [
+              "LastUpdate",
+              "22/10/2020 10:42:36"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "Replica",
-       "applicationName": "Replica",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:04:32"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"Replica",
+        "applicationName":"Replica",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 12:42:56"
+           ]
+        ]
      },
      {
-       "siteId": "TMP",
-       "siteName": "TMP",
-       "applicationId": "Replica",
-       "applicationName": "Replica",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:05:00"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"A_MSSQLDIFFBackUp",
+        "applicationName":"A_MSSQLDIFFBackUp",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 12:54:13"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "A_MSSQLDIFFBackUp",
-       "applicationName": "A_MSSQLDIFFBackUp",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:26:10"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"CarrierSvc",
+        "applicationName":"CarrierSvc",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "CarrierSvc",
-       "applicationName": "CarrierSvc",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"A_MSSQLFULLBackUp",
+        "applicationName":"A_MSSQLFULLBackUp",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:04:13"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "A_MSSQLFULLBackUp",
-       "applicationName": "A_MSSQLFULLBackUp",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:26:08"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"SAPBO-Stage",
+        "applicationName":"SAPBO-Stage",
+        "backgroundColor":"Grey",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Grey"
+                 ]
+              }
+           ],
+           "labels":[
+              "UNKNOWN"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UNKNOWN",
+        "info":[
+           [
+              "LastUpdate",
+              "03/11/2020 16:51:17"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "SAPBO-Stage",
-       "applicationName": "SAPBO-Stage",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Grey"
-             ]
-           }
-         ],
-         "labels": [
-           "UNKNOWN"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UNKNOWN",
-       "info": [
-         [
-           "LastUpdate",
-           "03/11/2020 16:51:17"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"PromisIC_SERVER",
+        "applicationName":"PromisIC_SERVER",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "PromisIC_SERVER",
-       "applicationName": "PromisIC_SERVER",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:44"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"PrintLabelGroup",
+        "applicationName":"PrintLabelGroup",
+        "backgroundColor":"Grey",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Grey"
+                 ]
+              }
+           ],
+           "labels":[
+              "UNKNOWN"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UNKNOWN",
+        "info":[
+           [
+              "LastUpdate",
+              "25/11/2020 17:33:56"
+           ]
+        ]
      },
      {
-       "siteId": "WLD",
-       "siteName": "WLD",
-       "applicationId": "W_MSSQLDIFFBackUp",
-       "applicationName": "W_MSSQLDIFFBackUp",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:26:10"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"AutomationServer",
+        "applicationName":"AutomationServer",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":9,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              9
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "WLD",
-       "siteName": "WLD",
-       "applicationId": "W_MSSQLFULLBackUp",
-       "applicationName": "W_MSSQLFULLBackUp",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:26:10"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"ToolLife_ETL",
+        "applicationName":"ToolLife_ETL",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "PrintLabelGroup",
-       "applicationName": "PrintLabelGroup",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Grey"
-             ]
-           }
-         ],
-         "labels": [
-           "UNKNOWN"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UNKNOWN",
-       "info": [
-         [
-           "LastUpdate",
-           "25/11/2020 17:33:56"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"AutoSeparatorServer",
+        "applicationName":"AutoSeparatorServer",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "AutomationServer",
-       "applicationName": "AutomationServer",
-       "applicationTotalProcessCount": 9,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           9
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"MTSserver",
+        "applicationName":"MTSserver",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "ToolLife_ETL",
-       "applicationName": "ToolLife_ETL",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"PackingServer",
+        "applicationName":"PackingServer",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      },
      {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "AutoSeparatorServer",
-       "applicationName": "AutoSeparatorServer",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
-     },
-     {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "MTSserver",
-       "applicationName": "MTSserver",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
-     },
-     {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "PackingServer",
-       "applicationName": "PackingServer",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
-     },
-     {
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "applicationId": "MTSETL_SERVER",
-       "applicationName": "MTSETL_SERVER",
-       "applicationTotalProcessCount": 1,
-       "applicationPieChartData": {
-         "colors": [
-           {
-             "backgroundColor": [
-               "Chartreuse"
-             ]
-           }
-         ],
-         "labels": [
-           "UP"
-         ],
-         "values": [
-           1
-         ]
-       },
-       "applicationState": "UP",
-       "info": [
-         [
-           "LastUpdate",
-           "16/12/2020 13:31:49"
-         ]
-       ]
+        "siteId":"AMK",
+        "siteName":"AMK",
+        "applicationId":"MTSETL_SERVER",
+        "applicationName":"MTSETL_SERVER",
+        "backgroundColor":"Chartreuse",
+        "fontColor":"WHITE",
+        "applicationTotalProcessCount":1,
+        "applicationPieChartData":{
+           "colors":[
+              {
+                 "backgroundColor":[
+                    "Chartreuse"
+                 ]
+              }
+           ],
+           "labels":[
+              "UP"
+           ],
+           "values":[
+              1
+           ]
+        },
+        "applicationState":"UP",
+        "info":[
+           [
+              "LastUpdate",
+              "17/12/2020 13:06:15"
+           ]
+        ]
      }
-   ]
- }
+  ]
+}

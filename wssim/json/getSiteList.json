@@ -1,15 +1,17 @@
 {
-   "txnId":"c2de5776-cb5c-4f3e-a359-2c656eaad847",
-   "token":"vw0UJRWL/eYOJe1zuNEGuQ==",
+   "txnId":"36e66a73-b2a8-42f6-ba27-07187f53a2e3",
+   "token":"hnL4soOiwRKIa/GVu2mAmQ==",
    "userId":"masdashboard",
    "txnName":"getSiteList",
-   "txnDate":"Wed Dec 16 2020 13:28:13 GMT+0800 (Singapore Standard Time)",
+   "txnDate":"Thu Dec 17 2020 13:04:59 GMT+0800 (Singapore Standard Time)",
    "statusCode":200,
    "statusMsg":"OK",
    "content":[
       {
          "siteId":"ALL SITES",
          "siteName":"ALL SITES",
+         "fontColor":"WHITE",
+         "backgroundColor":"Red",
          "siteState":"DOWN",
          "info":[
             {
@@ -27,6 +29,8 @@
       {
          "siteId":"AMK",
          "siteName":"AMK",
+         "fontColor":"WHITE",
+         "backgroundColor":"Red",
          "siteState":"DOWN",
          "info":[
             {
@@ -44,6 +48,8 @@
       {
          "siteId":"TMP",
          "siteName":"TMP",
+         "fontColor":"WHITE",
+         "backgroundColor":"Chartreuse",
          "siteState":"UP",
          "info":[
             {
@@ -55,6 +61,8 @@
       {
          "siteId":"WLD",
          "siteName":"WLD",
+         "fontColor":"WHITE",
+         "backgroundColor":"Chartreuse",
          "siteState":"UP",
          "info":[
             {

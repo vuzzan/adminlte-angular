@@ -96,10 +96,10 @@ export class DashboardComponent implements OnInit {
     socketSrv.get().subscribe((msg) => {
       this.loading = false;
       if (msg.statusCode !== 200 && msg.statusMsg !== 'OK') {
-        this.throwError(msg.statusCode, msg.statusMsg);
+        //this.throwError(msg.statusCode, msg.statusMsg);
       }
       if (msg.txnDate) this.updatedTime = msg.txnDate;
-      console.log('socketSrv.get().subscribe ' + msg.txnName);
+      //console.log('socketSrv.get().subscribe ' + msg.txnName);
       switch (msg.txnName) {
         case 'RegisterClient':
           this.handleRegistration(msg);
@@ -126,9 +126,12 @@ export class DashboardComponent implements OnInit {
     });
   }
   open() {
+    this.selectedTab =1;
+    this.idActionConfirm = false;
+    this.idShowInfo = true;
     //this.modalService.dismissAll();
-    console.log('Modal open');
-    console.log(this.content);
+    // console.log('Modal open');
+    // console.log(this.content);
     this.modalService.open(this.content, {
       // ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
@@ -144,9 +147,10 @@ export class DashboardComponent implements OnInit {
   }
 
   viewApplicationModal(data) {
-    console.log("viewApplicationModal call");
-    console.log(data);
+    // console.log("viewApplicationModal call");
+    // console.log(data);
     this.selectedProcessId = "";
+    this.selectedApplication = data.applicationId;
     if (this.token){
       this.socketSrv.continueSend(
         'getApplicationInfo',
@@ -309,17 +313,8 @@ export class DashboardComponent implements OnInit {
           data: 'applicationState',
           name: 'applicationState',
           render: function (data, type, row) {
-            var color_code = {
-              UP: 'success',
-              DOWN: 'danger',
-              UNKNOWN: 'warning',
-              BUSY: 'primary',
-              WARNING: 'warning',
-            };
             var html =
-              '<span class="badge badge-lg badge-' +
-              color_code[data] +
-              '">' +
+              '<span style="'+'background-color:'+(row.backgroundColor)+';'+'color:'+(row.fontColor)+';'+'" class="badge badge-lg">' +
               data +
               '</span>';
             return html;
@@ -334,22 +329,13 @@ export class DashboardComponent implements OnInit {
         },
         { "orderable": false, "title": "Status", "data":"applicationPieChartData" , "name":"applicationPieChartData",
           "className": "text-left",render: function ( data, type, row ) {
-            //console.log(data);
-            var color_code = {
-              'UP': 'success',
-              'DOWN': 'danger',
-              'UNKNOWN': 'warning',
-              'BUSY': 'primary',
-              'WARNING': 'warning'
-            };
-            
             var total = row.applicationTotalProcessCount;
             var html = '<div class="progress progress-lg">';
             for(var i=0; i< data.labels.length; i++ ){
-              var color = color_code[data.labels[i]];
-              //console.log(data.labels[i]);
+              //console.log(data.colors[0])
+              var backgroundColor = data.colors[0].backgroundColor[i];
               var percen = Math.floor(100* (data.values[i]/total));
-              html += '<div class="progress-bar bg-'+color+'" role="progressbar" style="width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
+              html += '<div class="progress-bar" role="progressbar" style="background-color:'+backgroundColor+';width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
               data.values[i]+'</div>';
             }
             html += '</div>';
@@ -585,6 +571,12 @@ export class DashboardComponent implements OnInit {
         appSettings.sitelist.push(obj);
       });
       this.store.dispatch(new SettingsActions.Update(appSettings));
+      // Reload first all site
+      var appSettingsAllsites = {
+        siteId: "ALL SITES",
+        siteUpdated: true,
+      };
+      this.store.dispatch(new SettingsActions.Update(appSettingsAllsites));
     } else {
       this.sitelist = [];
       this.throwError(msg.statusCode, "ERROR: getSiteList: " +msg.statusMsg);
@@ -703,6 +695,7 @@ export class DashboardComponent implements OnInit {
     this.code = 'Error Code ' + code + ':';
     this.msg = msg;
     this.type = 'alert';
+    //console.log("throwError="+msg)
     this.toastr.error(''+this.msg);
   }
 
@@ -744,6 +737,21 @@ export class DashboardComponent implements OnInit {
   sendAction() {
     this.confirmPassword = ((document.getElementById("confirmPassword") as HTMLInputElement).value);
     this.confirmUserid = ((document.getElementById("confirmUserid") as HTMLInputElement).value);
+    var errorCheck = "";
+    this.confirmPassword = this.confirmPassword.trim();
+    this.confirmUserid = this.confirmUserid.trim();
+
+    if(this.confirmUserid.length<4){
+      errorCheck+= "Your username contains at least 4 characters. \n";
+    }
+
+    if(this.confirmPassword.length<4){
+      errorCheck+= "Your password contains at least 4 characters. \n";
+    }
+    if(errorCheck.length>0){
+      this.toastr.error(errorCheck, "ERROR");
+      return;
+    }
     var data = {
       siteId: this.selectedSite,
       applicationId: this.selectedApplication,

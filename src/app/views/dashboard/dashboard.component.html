@@ -21,33 +21,17 @@
           <!-- /.card-header -->
           <div class="card-body">
             <a
-              style="
-                border-radius: 20px;
-                height: {{ site.siteName=='ALL SITES'?'120':'90' }}px;
-                min-width: 120px;
-                font-size: 30px;
-              "
-              class="btn btn-lg btn-app bg-{{
-                site.siteState == 'UP'
-                  ? 'success'
-                  : site.siteState == 'DOWN'
-                  ? 'danger'
-                  : 'warning'
-              }}"
+              style="background-color:{{ site.backgroundColor }};border-radius: 20px;height: {{ site.siteName=='ALL SITES'?'120':'90' }}px;min-width: 120px;font-size: 30px;"
+              class="btn btn-lg btn-app"
               *ngFor="let site of sitelist; let i = index"
             >
               <span class="badge badge-pill badge-primary">{{ site.siteState }}</span>
               <a
+                style="background-color:{{ site.backgroundColor }};"
                 (click)="chooseSite(site)"
-                class="btn btn-sm btn-{{
-                  site.siteState == 'UP'
-                    ? 'success'
-                    : site.siteState == 'DOWN'
-                    ? 'danger'
-                    : 'warning'
-                }}"
+                class="btn btn-sm"
               >
-                <b style="font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
+                <b style="color: {{ site.fontColor }};font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
                   >{{ site.siteName }} <br /> {{ site.label }}</b
                 >
               </a>
