@@ -8,8 +8,8 @@
   "statusMsg":"OK",
   "content":[
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"EAP_SERVER",
         "applicationName":"EAP_SERVER",
         "backgroundColor":"Red",
@@ -42,8 +42,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"AutoSched",
         "applicationName":"AutoSched",
         "backgroundColor":"Yellow",
@@ -73,8 +73,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"CimWeb",
         "applicationName":"CimWeb",
         "backgroundColor":"Chartreuse",
@@ -104,8 +104,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"FEMonitorSvc",
         "applicationName":"FEMonitorSvc",
         "backgroundColor":"Chartreuse",
@@ -135,8 +135,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"MaterialServer",
         "applicationName":"MaterialServer",
         "backgroundColor":"Grey",
@@ -166,8 +166,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"Replica",
         "applicationName":"Replica",
         "backgroundColor":"Chartreuse",
@@ -197,8 +197,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"A_MSSQLDIFFBackUp",
         "applicationName":"A_MSSQLDIFFBackUp",
         "backgroundColor":"Chartreuse",
@@ -228,8 +228,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"CarrierSvc",
         "applicationName":"CarrierSvc",
         "backgroundColor":"Chartreuse",
@@ -259,8 +259,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"A_MSSQLFULLBackUp",
         "applicationName":"A_MSSQLFULLBackUp",
         "backgroundColor":"Chartreuse",
@@ -290,8 +290,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"SAPBO-Stage",
         "applicationName":"SAPBO-Stage",
         "backgroundColor":"Grey",
@@ -321,8 +321,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"PromisIC_SERVER",
         "applicationName":"PromisIC_SERVER",
         "backgroundColor":"Chartreuse",
@@ -352,8 +352,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"PrintLabelGroup",
         "applicationName":"PrintLabelGroup",
         "backgroundColor":"Grey",
@@ -383,8 +383,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"AutomationServer",
         "applicationName":"AutomationServer",
         "backgroundColor":"Chartreuse",
@@ -414,8 +414,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"ToolLife_ETL",
         "applicationName":"ToolLife_ETL",
         "backgroundColor":"Chartreuse",
@@ -445,8 +445,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"AutoSeparatorServer",
         "applicationName":"AutoSeparatorServer",
         "backgroundColor":"Chartreuse",
@@ -476,8 +476,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"MTSserver",
         "applicationName":"MTSserver",
         "backgroundColor":"Chartreuse",
@@ -507,8 +507,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"PackingServer",
         "applicationName":"PackingServer",
         "backgroundColor":"Chartreuse",
@@ -538,8 +538,8 @@
         ]
      },
      {
-        "siteId":"AMK",
-        "siteName":"AMK",
+        "siteId":"SITEID",
+        "siteName":"SITEID",
         "applicationId":"MTSETL_SERVER",
         "applicationName":"MTSETL_SERVER",
         "backgroundColor":"Chartreuse",

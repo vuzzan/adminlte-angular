@@ -37,9 +37,8 @@ websocketServer.on('connection', (webSocketClient) => {
         else if(obj.txnName=="getApplicationList"){
             console.log(obj.txnName);
 			let rawdata = fs.readFileSync('json/getApplicationList.json', 'utf8');
-
 			var siteId = obj.content.siteId;
-			if(obj.content.siteId=='ALL'){
+			if(obj.content.siteId.indexOf('ALL')>-1){
 				siteId = 'AMK';
 			}
 			console.log('siteId='+siteId);
@@ -55,7 +54,7 @@ websocketServer.on('connection', (webSocketClient) => {
             console.log(obj.txnName);
 			let rawdata = fs.readFileSync('json/getProcessList.json', 'utf8');
 			var siteId = obj.content.siteId;
-			if(obj.content.siteId=='ALL SITES'){
+			if(obj.content.siteId.indexOf('ALL')>-1){
 				siteId = 'AMK';
 			}
 			console.log('siteId='+siteId);
