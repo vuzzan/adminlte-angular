@@ -78,7 +78,7 @@
 <!-- /.content -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?(appSettings.siteId +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
+    <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?(processInfo.siteId +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
       :
       (appInfo.siteId +"] > [" + (appInfo.applicationId==undefined?selectedApplication:appInfo.applicationId) )
     }}]</h4>
@@ -147,7 +147,7 @@
                     </tbody>
                     <tbody *ngIf="selectedProcessId==''">
                       <tr *ngFor="let obj of appInfo.info; let i = index">
-                        <th style="width: 50%;">111 {{ obj[0] }}</th>
+                        <th style="width: 50%;">{{ obj[0] }}</th>
                         <td>{{ obj[1] }}</td>
                       </tr>
                     </tbody>

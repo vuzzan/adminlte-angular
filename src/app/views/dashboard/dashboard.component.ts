@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   sitelist: Array<Site> = [];
   processlist: Array<Process>;
   processInfo: ProcessDef = {
+    siteId: '',
     processId: '',
     processName: '',
     processState: '',
@@ -116,9 +117,9 @@ export class DashboardComponent implements OnInit {
         case 'getProcessInfo':
           this.handleGetProcessInfo(msg);
           break;
-          case 'getApplicationInfo':
-            this.handleApplicationInfo(msg);
-            break;
+        case 'getApplicationInfo':
+          this.handleApplicationInfo(msg);
+          break;
         case 'doAction':
           this.handleDoAction(msg);
           break;
@@ -145,7 +146,28 @@ export class DashboardComponent implements OnInit {
     //   console.log(this.closeResult);
     // });
   }
-
+  openProcessListView(row: Node, data: any[] | Object, mapIndex: number) {
+    this.datatableElement.dtInstance.then(
+      (dtInstance: DataTables.Api) => {
+        var table = dtInstance;
+        var mapIndexRow = table.rows()[0];
+        var index = mapIndexRow[mapIndex];
+        if (this.lastRowIndex > -1 ){
+            var row_select_old = table.row(this.lastRowIndex);
+            if (row_select_old.child.isShown()) {
+              row_select_old.child().hide();
+            }
+        }
+        this.lastRowIndex = index;// set 8
+        var row_select = table.row(index);// find 8
+        if (row_select.child.isShown()) {
+          row_select.child('').hide();
+        } else {
+          row_select.child(this.format(data)).show();
+        }
+      }
+    );
+  }
   viewApplicationModal(data) {
     // console.log("viewApplicationModal call");
     // console.log(data);
@@ -231,7 +253,7 @@ export class DashboardComponent implements OnInit {
       '"></table>' +
       '</div>' +
       '</div>';
-    console.log(timeline);
+    //console.log(timeline);
     //timeline = '<table class="table table-bordered table-triped" id="datatable_table_process_'+this.lastRowIndex+'"></table>';
     return timeline;
   }
@@ -290,16 +312,9 @@ export class DashboardComponent implements OnInit {
       //ajax: 'assets/listapp.json',
       data: this.applicationlist,
       columns: [
-        { orderable: false, title: 'Site', width: '5%', data: 'siteId' },
-        // {
-        //   orderable: false,
-        //   className: 'text-center',
-        //   title: 'Application',
-        //   width: '2%',
-        //   data: 'applicationId',
-        // },
+        { orderable: true, title: 'Site', width: '5%', data: 'siteId' },
         {
-          orderable: false,
+          orderable: true,
           className: 'text-center',
           title: 'Application Name',
           width: '30%',
@@ -345,7 +360,7 @@ export class DashboardComponent implements OnInit {
           }
         },
         {
-          orderable: false,
+          orderable: true,
           title: 'Last Update',
           data: 'info',
           name: 'info',
@@ -378,30 +393,14 @@ export class DashboardComponent implements OnInit {
         });
         $('td:lt(6 )', row).unbind('click');
         $('td:lt(6 )', row).bind('click', () => {
-          this.datatableElement.dtInstance.then(
-            (dtInstance: DataTables.Api) => {
-              var table = dtInstance;
-              if (this.lastRowIndex > -1 && this.lastRowIndex != index) {
-                var row_select_old = table.row(this.lastRowIndex);
-                if (row_select_old.child.isShown()) {
-                  row_select_old.child().hide();
-                }
-              }
-              this.lastRowIndex = index;
-              var row_select = table.row(index);
-              var tr = $(this).parents('tr');
-              if (row_select.child.isShown()) {
-                row_select.child('').hide();
-              } else {
-                row_select.child(this.format(data)).show();
-              }
-            }
-          );
+          this.appInfo = data;
+          this.openProcessListView(row, data, index);
         });
         return row;
       },
       paging: false,
       searching: false,
+      "order": [[ 1, "asc" ]]
     };
     window['angularComponentReference'] = {
       component: this,
@@ -411,8 +410,6 @@ export class DashboardComponent implements OnInit {
     };
 
     this.registerClient();
-  
-  
   }
 
   updateTableIndex() {
@@ -449,39 +446,29 @@ export class DashboardComponent implements OnInit {
         },
         // Set column definition initialisation properties.
         columns: [
-          // {
-          //   orderable: false,
-          //   className: 'text-left',
-          //   title: 'Process Id',
-          //   width: '50%',
-          //   data: 'processId',
-          //   name: 'processId',
-          // },
           {
-            orderable: false,
+            orderable: true,
             title: 'Process Name',
             width: '60%',
             data: 'processName',
             name: 'processName',
           },
           {
-            orderable: false,
+            orderable: true,
             className: 'text-center',
             title: 'Process State',
             data: 'processState',
             name: 'processState',
             render: function (data, type, row) {
-              var color_code = {
-                UP: 'success',
-                DOWN: 'danger',
-                UNKNOWN: 'info',
-                BUSY: 'primary',
-                WARNING: 'warning',
-              };
+              // var color_code = {
+              //   UP: 'success',
+              //   DOWN: 'danger',
+              //   UNKNOWN: 'info',
+              //   BUSY: 'primary',
+              //   WARNING: 'warning',
+              // };
               var html =
-                '<span class="badge badge-' +
-                color_code[data] +
-                '">' +
+                '<span class="badge" style="background-color:'+row.backgroundColor+';color:'+row.fontColor+'">' +
                 data +
                 '</span>';
               return html;
@@ -504,7 +491,7 @@ export class DashboardComponent implements OnInit {
                 row.processName +
                 "'," +
                 "'" +
-                siteId +
+                row.siteId +
                 "'," +
                 "'" +
                 appId +
@@ -681,6 +668,7 @@ export class DashboardComponent implements OnInit {
       this.show = false;
       this.processInfo = msg.content[0];
       this.selectedProcessId = this.processInfo.processId;
+      this.selectedSite = this.processInfo.siteId;
     } else {
       this.throwError(msg.statusCode, "ERROR: getProcessInfo: " +msg.statusMsg);
     }

@@ -7,10 +7,10 @@
          "Start",
          "Stop"
        ],
-       "siteId": "AMK",
-       "siteName": "AMK",
-       "processId": "ASP-502",
-       "processName": "ASP-502",
+       "siteId": "SITEID",
+       "siteName": "SITEID",
+       "processId": "PROCESSID",
+       "processName": "PROCESSID",
        "processState": "UP",
        "info": [
          [

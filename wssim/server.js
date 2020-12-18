@@ -80,10 +80,12 @@ websocketServer.on('connection', (webSocketClient) => {
 
 		}
         else if(obj.txnName=="getProcessInfo"){
+            console.log(obj.content);
  			let rawdata = fs.readFileSync('json/getProcessInfo.json', 'utf8');
             var jsonResponse = rawdata.replace(/SITEID/g, obj.content.siteId);
 			jsonResponse = jsonResponse.replace(/PROCESSID/g, obj.content.processId);
-			jsonResponse = jsonResponse.replace(/APPID/g, obj.content.applicationId);
+            jsonResponse = jsonResponse.replace(/APPID/g, obj.content.applicationId);
+            console.log("SEND: "+jsonResponse)
             webSocketClient.send(jsonResponse);
         }
         else if(obj.txnName=="getApplicationInfo"){
