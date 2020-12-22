@@ -82,17 +82,20 @@ export class DashboardComponent implements OnInit {
     private store: Store<AppState>,
     private tokenSrv: TokenService,
     public appService: AppService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
     this.route.queryParams.subscribe((params) => {
       this.cimWebUserId = params['userid'];
       this.cimWebToken = params['token'];
-      // console.log("1this.cimWebUserId="+this.cimWebUserId);
-      // console.log("2this.cimWebToken="+this.cimWebToken);
+      console.log("this.cimWebUserId="+this.cimWebUserId);
+      console.log("this.cimWebToken="+this.cimWebToken);
     });
-    console.log('this.cimWebToken=' + this.cimWebToken);
-    if (!this.tokenSrv.validateToken(this.cimWebToken))
+    console.log("this.cimWebUserId="+this.cimWebUserId);
+    console.log("this.cimWebToken="+this.cimWebToken);
+    if (!this.tokenSrv.validateToken(this.cimWebToken)){
+      console.log("Validate fail toten...")
       this.router.navigateByUrl('/error');
+    }
 
     socketSrv.get().subscribe((msg) => {
       this.loading = false;
@@ -130,21 +133,42 @@ export class DashboardComponent implements OnInit {
     this.selectedTab =1;
     this.idActionConfirm = false;
     this.idShowInfo = true;
-    //this.modalService.dismissAll();
-    // console.log('Modal open');
-    // console.log(this.content);
     this.modalService.open(this.content, {
-      // ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
-      // backdrop: 'static'
+    }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      console.log("this.closeResult="+this.closeResult);
+      this.closeDialog();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log("this.closeResult="+this.closeResult);
+      this.closeDialog();
     });
-    // .result.then((result) => {
-    //   this.closeResult = `Closed with: ${result}`;
-    //   console.log(this.closeResult);
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //   console.log(this.closeResult);
-    // });
+  }
+  closeDialog() {
+    if(this.selectedProcessId=="" ){
+      // get app info
+      console.log("closeDialog ====================================="+this.lastRowIndex);
+      if(this.lastRowIndex==-1){
+        this.getApplicationList(this.selectedSite);
+      }
+      else{
+        this.getProcessList(this.selectedSite, this.selectedApplication);  
+      }
+    }
+    else{
+      // get processlist
+      this.getProcessList(this.selectedSite, this.selectedApplication);
+    }
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
   openProcessListView(row: Node, data: any[] | Object, mapIndex: number) {
     this.datatableElement.dtInstance.then(
@@ -157,11 +181,13 @@ export class DashboardComponent implements OnInit {
             if (row_select_old.child.isShown()) {
               row_select_old.child().hide();
             }
+
         }
         this.lastRowIndex = index;// set 8
         var row_select = table.row(index);// find 8
         if (row_select.child.isShown()) {
           row_select.child('').hide();
+          this.lastRowIndex = -1;
         } else {
           row_select.child(this.format(data)).show();
         }
@@ -173,6 +199,8 @@ export class DashboardComponent implements OnInit {
     // console.log(data);
     this.selectedProcessId = "";
     this.selectedApplication = data.applicationId;
+    this.stopProcessList();
+    this.stopApplicationList();
     if (this.token){
       this.socketSrv.continueSend(
         'getApplicationInfo',
@@ -189,6 +217,8 @@ export class DashboardComponent implements OnInit {
   viewProcessModal(processId, processName, siteId, appId) {
     console.log("viewProcessModal call");
     this.selectedProcessId = processId;
+    this.stopProcessList();
+    this.stopApplicationList();
     if (this.token){
       this.socketSrv.continueSend(
         'getProcessInfo',
@@ -203,15 +233,7 @@ export class DashboardComponent implements OnInit {
     this.open();
     // console.log("Modal open done...");
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
+  
   buildTableProcess(index,
     applicationName,
     applicationState,
@@ -283,6 +305,9 @@ export class DashboardComponent implements OnInit {
           this.appSettings != undefined &&
           settings.applicationUpdated == true
         ) {
+          // Neo: stop pushback list application...
+          this.stopApplicationList();
+          //
           this.getProcessList(this.rowSiteId, settings.applicationId);
           this.appSettings = settings;
         } else {

@@ -25,11 +25,16 @@ const routes: Routes = [
         component: BlankComponent,
       },
       {
+        path: 'error',
+        component: BlankComponent,
+      },
+      {
         path: '',
         component: DashboardComponent,
       },
     ],
   },
+  
   {
     path: 'login',
     component: LoginComponent,
@@ -40,7 +45,7 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [NonAuthGuard],
   },
-  { path: '**', redirectTo: '' },
+  //{ path: '**', redirectTo: '' },
 ];
 
 @NgModule({
