@@ -312,7 +312,12 @@ export class DashboardComponent implements OnInit {
       //ajax: 'assets/listapp.json',
       data: this.applicationlist,
       columns: [
-        { orderable: true, title: 'Site', width: '5%', data: 'siteId' },
+        { orderable: true, 
+          title: 'Site', 
+          width: '5%', 
+          className: 'text-center',
+          data: 'siteId' }
+        ,
         {
           orderable: true,
           className: 'text-center',
@@ -322,7 +327,7 @@ export class DashboardComponent implements OnInit {
           name: 'applicationName',
         },
         {
-          orderable: false,
+          orderable: true,
           className: 'text-center',
           title: 'State',
           data: 'applicationState',
@@ -348,9 +353,10 @@ export class DashboardComponent implements OnInit {
             var html = '<div class="progress progress-lg">';
             for(var i=0; i< data.labels.length; i++ ){
               //console.log(data.colors[0])
+              var fontColor = row.fontColor;
               var backgroundColor = data.colors[0].backgroundColor[i];
               var percen = Math.floor(100* (data.values[i]/total));
-              html += '<div class="progress-bar" role="progressbar" style="background-color:'+backgroundColor+';width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
+              html += '<div class="progress-bar" role="progressbar" style="color:'+fontColor+';background-color:'+backgroundColor+';width: '+percen+'%" aria-valuenow="'+percen+'" aria-valuemin="0" aria-valuemax="100">'+
               data.values[i]+'</div>';
             }
             html += '</div>';
@@ -400,7 +406,7 @@ export class DashboardComponent implements OnInit {
       },
       paging: false,
       searching: false,
-      "order": [[ 1, "asc" ]]
+      "order": []
     };
     window['angularComponentReference'] = {
       component: this,

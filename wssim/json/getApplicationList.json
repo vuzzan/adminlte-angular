@@ -140,7 +140,7 @@
         "applicationId":"MaterialServer",
         "applicationName":"MaterialServer",
         "backgroundColor":"Grey",
-        "fontColor":"WHITE",
+        "fontColor":"BLACK",
         "applicationTotalProcessCount":1,
         "applicationPieChartData":{
            "colors":[

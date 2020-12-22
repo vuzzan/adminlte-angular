@@ -48,7 +48,7 @@
       {
          "siteId":"TMP",
          "siteName":"TMP",
-         "fontColor":"WHITE",
+         "fontColor":"RED",
          "backgroundColor":"Chartreuse",
          "siteState":"UP",
          "info":[
@@ -61,7 +61,7 @@
       {
          "siteId":"WLD",
          "siteName":"WLD",
-         "fontColor":"WHITE",
+         "fontColor":"BLACK",
          "backgroundColor":"Chartreuse",
          "siteState":"UP",
          "info":[

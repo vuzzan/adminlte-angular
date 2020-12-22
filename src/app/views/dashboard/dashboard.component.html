@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Status Overview</h3>
+            <h3 class="card-title" style="font-size: 1.6em;">Status Overview</h3>
             <div class="card-tools">
               <span data-toggle="tooltip" class="badge bg-primary"
                 >Last Refresh Time: {{lastSiteListTime}}</span
@@ -25,14 +25,18 @@
               class="btn btn-lg btn-app"
               *ngFor="let site of sitelist; let i = index"
             >
-              <span class="badge badge-pill badge-primary">{{ site.siteState }}</span>
+              <span class="badge badge-light btn btn-primary" style="font-size: 13px;">{{ site.siteState }}</span>
               <a
                 style="background-color:{{ site.backgroundColor }};"
                 (click)="chooseSite(site)"
                 class="btn btn-sm"
               >
                 <b style="color: {{ site.fontColor }};font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
-                  >{{ site.siteName }} <br /> {{ site.label }}</b
+                  >{{ site.siteName }}</b
+                >
+                <br/>
+                <b style="padding-right:10px;padding-left:10px;width: 100px; border: 2px solid; color: {{ site.fontColor }};font-size: {{ site.siteName=='ALL SITES'?'25':'20' }}px;"
+                  >{{ site.label }}</b
                 >
               </a>
             </a>
@@ -55,7 +59,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">List Applications of {{ selectedSite}}</h3>
+            <h2 class="card-title" style="font-size: 1.6em;">List Applications of {{ selectedSite}}</h2>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
