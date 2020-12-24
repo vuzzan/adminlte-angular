@@ -4,11 +4,10 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title" style="font-size: 1.6em;">Status Overview</h3>
+            <h3 class="card-title" style="font-size: 2.0em;">Status Overview</h3>
             <div class="card-tools">
               <span data-toggle="tooltip" class="badge bg-primary"
-                >Last Refresh Time: {{lastSiteListTime}}</span
-              >
+                    style="font-size: 1.0em;">Last Refresh Time: {{updatedTime}}</span>
               <button
                 type="button"
                 class="btn btn-tool"
@@ -59,7 +58,12 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title" style="font-size: 1.6em;">List Applications of {{ selectedSite}}</h2>
+            <h2 class="card-title" style="font-size: 2.0em;">{{ selectedSite}}</h2>
+            <div class="card-tools">
+              Refresh Mode: <button class="btn btn-sm btn-{{buttonRefresh=='AUTO'?'success':'warning'}}" (click)="toggleRefresh()">{{buttonRefresh}}</button> <br /> <br />
+              <span data-toggle="tooltip" class="badge bg-primary"
+                    style="font-size: 1.0em;">Last Refresh Time: {{updatedTimeAppList}}</span>
+            </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -82,9 +86,9 @@
 <!-- /.content -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?(processInfo.siteId +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
+    <h4 class="modal-title" id="modal-basic-title">[{{selectedProcessId!=''?((processInfo.siteId==''?'EMPTY2':processInfo.siteId) +"] > [" + appSettings.applicationId +"] > [" + selectedProcessId)
       :
-      (appInfo.siteId +"] > [" + (appInfo.applicationId==undefined?selectedApplication:appInfo.applicationId) )
+      ((appInfo.siteId==''?'EMPTY1':appInfo.siteId) +"] > [" + (appInfo.applicationId==undefined?selectedApplication:appInfo.applicationId) )
     }}]</h4>
     <button
       type="button"
@@ -141,18 +145,18 @@
           <div class="card-body">
             <div class="tab-content">
               <div class="tab-pane fade {{selectedTab ==1?'active show':''}}" *ngIf="selectedTab == 1">
-                <div class="card-body table-responsive p-0" style="height: 300px;">
-                  <table class="table table-head-fixed text-nowrap">
+                <div class="card-body table-responsive p-0" style="height: 300px;overflow-x: scroll">
+                  <table class="table table-head-fixed" style="height: 300px;overflow-x: scroll">
                     <tbody *ngIf="selectedProcessId!=''">
                       <tr *ngFor="let obj of processInfo.info; let i = index">
-                        <th style="width: 50%;">{{ obj[0] }}</th>
-                        <td>{{ obj[1] }}</td>
+                        <td style="width: 30%;overflow-x:scroll;">{{ obj[0] }}</td>
+                        <td style="overflow-x:scroll;">{{ obj[1] }}</td>
                       </tr>
                     </tbody>
                     <tbody *ngIf="selectedProcessId==''">
                       <tr *ngFor="let obj of appInfo.info; let i = index">
-                        <th style="width: 50%;">{{ obj[0] }}</th>
-                        <td>{{ obj[1] }}</td>
+                        <td style="width: 30%;">{{ obj[0] }}</td>
+                        <td style="overflow-x:scroll;">{{ obj[1] }}</td>
                       </tr>
                     </tbody>
                   </table>

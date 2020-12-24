@@ -16,7 +16,11 @@ export class Set implements Action {
 export class Update implements Action {
   readonly type = UPDATE;
 
-  constructor(public data: any) {}
+  constructor(public data: any) {
+    if(data.hasOwnProperty("connectionStatus")==false){
+      data["connectionStatus"] = "";
+    }
+  }
 }
 
 export class Reset implements Action {

@@ -14,4 +14,5 @@ export interface AppSettings {
   applicationUpdated: boolean;
   processUpdated: boolean;
   processInfoUpdated: boolean;
+  connectionStatus: string;
 }

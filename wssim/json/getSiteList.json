@@ -71,5 +71,19 @@
          ],
          "label":"2/2"
       }
+      ,
+      {
+         "siteId":"NEO",
+         "siteName":"NEO",
+         "fontColor":"BLACK",
+         "backgroundColor":"Chartreuse",
+         "siteState":"UP",
+         "info":[
+            {
+               "UP":2
+            }
+         ],
+         "label":"2/2"
+      }
    ]
 }

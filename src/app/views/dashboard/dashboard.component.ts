@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
 
   doFlip: Boolean = false;
   updatedTime: String;
+  updatedTimeAppList: String;
   selectedProcessId: String = '';
   selectedSite: String = '';
   selectedApplication: String;
@@ -74,6 +75,11 @@ export class DashboardComponent implements OnInit {
   lastSiteListTime: any;
   selectedTab =1;
 
+  loadAllsiteAtFirstTime = false;
+  buttonRefresh = "AUTO";
+  buttonRefreshProcessListCount = 0;
+  buttonRefreshApplicationListCount = 0;
+
   constructor(
     private modalService: NgbModal,
     private socketSrv: SocketService,
@@ -90,11 +96,11 @@ export class DashboardComponent implements OnInit {
       console.log("this.cimWebUserId="+this.cimWebUserId);
       console.log("this.cimWebToken="+this.cimWebToken);
     });
-    console.log("this.cimWebUserId="+this.cimWebUserId);
-    console.log("this.cimWebToken="+this.cimWebToken);
+    // console.log("this.cimWebUserId="+this.cimWebUserId);
+    // console.log("this.cimWebToken="+this.cimWebToken);
     if (!this.tokenSrv.validateToken(this.cimWebToken)){
-      console.log("Validate fail toten...")
-      this.router.navigateByUrl('/error');
+      // console.log("Validate fail toten...")
+      //this.router.navigateByUrl('/error');
     }
 
     socketSrv.get().subscribe((msg) => {
@@ -103,7 +109,8 @@ export class DashboardComponent implements OnInit {
         //this.throwError(msg.statusCode, msg.statusMsg);
       }
       if (msg.txnDate) this.updatedTime = msg.txnDate;
-      //console.log('socketSrv.get().subscribe ' + msg.txnName);
+      // console.log('socketSrv.get().subscribe ' + msg.txnName);
+      // console.log(msg);
       switch (msg.txnName) {
         case 'RegisterClient':
           this.handleRegistration(msg);
@@ -112,10 +119,29 @@ export class DashboardComponent implements OnInit {
           this.handleSiteList(msg);
           break;
         case 'getApplicationList':
-          this.handleApplicationList(msg);
+          // Check if MANUAL, do nothing
+          //console.log("this.buttonRefresh="+this.buttonRefresh+" this.buttonRefreshProcessListCount="+this.buttonRefreshProcessListCount+" this.buttonRefreshApplicationListCount="+this.buttonRefreshApplicationListCount);
+          if( this.buttonRefresh=='MANUAL' && this.buttonRefreshApplicationListCount>0){
+            // DO NOTHING
+            //console.log("======= NO CALL PROCESS APPLIST");
+          }
+          else {
+            this.buttonRefreshApplicationListCount++;
+            this.handleApplicationList(msg);
+            if (msg.txnDate) this.updatedTimeAppList = msg.txnDate;
+          }
           break;
         case 'getProcessList':
-          this.handleProcessList(msg);
+          //console.log("this.buttonRefresh="+this.buttonRefresh+" this.buttonRefreshProcessListCount="+this.buttonRefreshProcessListCount+" this.buttonRefreshApplicationListCount="+this.buttonRefreshApplicationListCount);
+          //if( this.buttonRefresh=='MANUAL' && this.buttonRefreshProcessListCount>0){
+            // DO NOTHING
+          //  console.log("======= NO CALL PROCESS handleProcessList");
+          //}
+          //else{
+            //this.buttonRefreshProcessListCount++;
+            this.handleProcessList(msg);
+          //}
+          //this.handleProcessList(msg);
           break;
         case 'getProcessInfo':
           this.handleGetProcessInfo(msg);
@@ -128,6 +154,18 @@ export class DashboardComponent implements OnInit {
           break;
       }
     });
+  }
+  toggleRefresh(){
+    if(this.buttonRefresh=="AUTO"){
+      this.buttonRefresh="MANUAL";
+    }
+    else{
+      this.buttonRefresh="AUTO";
+      this.buttonRefreshProcessListCount = 0;
+      this.buttonRefreshApplicationListCount = 0;      
+    }
+    // console.log("this.buttonRefresh="+this.buttonRefresh+" this.buttonRefreshProcessListCount="+this.buttonRefreshProcessListCount+
+    // " this.buttonRefreshApplicationListCount="+this.buttonRefreshApplicationListCount);
   }
   open() {
     this.selectedTab =1;
@@ -148,7 +186,7 @@ export class DashboardComponent implements OnInit {
   closeDialog() {
     if(this.selectedProcessId=="" ){
       // get app info
-      console.log("closeDialog ====================================="+this.lastRowIndex);
+      //console.log("closeDialog ====================================="+this.lastRowIndex);
       if(this.lastRowIndex==-1){
         this.getApplicationList(this.selectedSite);
       }
@@ -199,8 +237,8 @@ export class DashboardComponent implements OnInit {
     // console.log(data);
     this.selectedProcessId = "";
     this.selectedApplication = data.applicationId;
-    this.stopProcessList();
-    this.stopApplicationList();
+    //this.stopProcessList();
+    //this.stopApplicationList();
     if (this.token){
       this.socketSrv.continueSend(
         'getApplicationInfo',
@@ -217,8 +255,8 @@ export class DashboardComponent implements OnInit {
   viewProcessModal(processId, processName, siteId, appId) {
     console.log("viewProcessModal call");
     this.selectedProcessId = processId;
-    this.stopProcessList();
-    this.stopApplicationList();
+    //this.stopProcessList();//
+    //this.stopApplicationList();
     if (this.token){
       this.socketSrv.continueSend(
         'getProcessInfo',
@@ -285,12 +323,22 @@ export class DashboardComponent implements OnInit {
       siteUpdated: true,
     };
     this.store.dispatch(new SettingsActions.Update(appSettings));
+    this.buttonRefresh = "AUTO";
+    this.buttonRefreshApplicationListCount = 0;
+    this.buttonRefreshProcessListCount = 0;
   }
   ngOnInit() {
     this.store.select('appSettings').subscribe((settings) => {
-      console.log('UPDATE SITE DASHBOARD....');
-      console.log(this.appSettings);
-      console.log(settings);
+      console.log(settings.connectionStatus);
+      if( settings.connectionStatus.length>0){
+        if(settings.connectionStatus.indexOf("CLOSE")>-1){
+          this.toastr.error("Server connection lost", "Server Connection");
+        }
+        else{
+          this.toastr.info("Server connected", "Server Connection");
+        }
+      }
+      //
       if (
         this.appSettings === undefined ||
         (this.appSettings != undefined &&
@@ -306,7 +354,7 @@ export class DashboardComponent implements OnInit {
           settings.applicationUpdated == true
         ) {
           // Neo: stop pushback list application...
-          this.stopApplicationList();
+          //this.stopApplicationList();
           //
           this.getProcessList(this.rowSiteId, settings.applicationId);
           this.appSettings = settings;
@@ -569,6 +617,8 @@ export class DashboardComponent implements OnInit {
 
   getSiteList() {
     this.loading = true;
+    
+    
     // save time to refresh
     this.lastSiteListTime = moment().format();
     if (this.token) {
@@ -590,11 +640,19 @@ export class DashboardComponent implements OnInit {
       });
       this.store.dispatch(new SettingsActions.Update(appSettings));
       // Reload first all site
-      var appSettingsAllsites = {
-        siteId: "ALL SITES",
-        siteUpdated: true,
-      };
-      this.store.dispatch(new SettingsActions.Update(appSettingsAllsites));
+      console.log("this.loadAllsiteAtFirstTime="+this.loadAllsiteAtFirstTime)
+      if( this.loadAllsiteAtFirstTime==false ){
+        var appSettingsAllsites = {
+          siteId: "ALL SITES",
+          siteUpdated: true,
+        };
+        this.store.dispatch(new SettingsActions.Update(appSettingsAllsites));
+        this.loadAllsiteAtFirstTime = true;
+        console.log("=======================RUN this.loadAllsiteAtFirstTime="+this.loadAllsiteAtFirstTime)
+      }
+      else{
+        console.log("=======================-------------------IGMORE this.loadAllsiteAtFirstTime="+this.loadAllsiteAtFirstTime)
+      }
     } else {
       this.sitelist = [];
       this.throwError(msg.statusCode, "ERROR: getSiteList: " +msg.statusMsg);
@@ -604,6 +662,11 @@ export class DashboardComponent implements OnInit {
   getApplicationList(siteId) {
     this.loading = true;
     if (this.token && siteId.length > 0) {
+      // Reset order of table
+      this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        var table = dtInstance;
+        table.order([]);
+      });  
       this.selectedSite = siteId;
       this.socketSrv.continueSend(
         'getApplicationList',
@@ -698,6 +761,9 @@ export class DashboardComponent implements OnInit {
     if (msg.statusCode == 200 && msg.statusMsg == 'OK') {
       this.show = false;
       this.processInfo = msg.content[0];
+      console.log("=======================");
+      console.log(this.processInfo);
+      console.log("=======================");
       this.selectedProcessId = this.processInfo.processId;
       this.selectedSite = this.processInfo.siteId;
     } else {

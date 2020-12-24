@@ -10,4 +10,5 @@ export const settings = {
   applicationUpdated: false,
   processUpdated: false,
   processInfoUpdated:false,
+  connectionStatus:"",
 };
